@@ -3,10 +3,10 @@ using MiProyectoMVC.Business;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
-// 🔹 Inyección de dependencias (DEBE IR ANTES DE Build)
+
 builder.Services.AddScoped<ISinpeRepository, SinpeRepository>();
 builder.Services.AddScoped<IBitacoraRepository, BitacoraRepository>();
 builder.Services.AddScoped<SinpeBusiness>();
