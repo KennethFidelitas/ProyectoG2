@@ -8,12 +8,19 @@ using System.Text.Json;
 public class SinpeBusiness
 {
     private readonly ISinpeRepository _sinpeRepository;
+    private readonly IComercioRepository _comercioRepository;
+    private readonly ICajaRepository _cajaRepository;
     private readonly IBitacoraRepository _bitacoraRepository;
 
-    public SinpeBusiness(ISinpeRepository sinpeRepository,
-                         IBitacoraRepository bitacoraRepository)
+    public SinpeBusiness(
+        ISinpeRepository sinpeRepository,
+        IComercioRepository comercioRepository,
+        ICajaRepository cajaRepository,
+        IBitacoraRepository bitacoraRepository)
     {
         _sinpeRepository = sinpeRepository;
+        _comercioRepository = comercioRepository;
+        _cajaRepository = cajaRepository;
         _bitacoraRepository = bitacoraRepository;
     }
 
@@ -28,24 +35,45 @@ public class SinpeBusiness
                 sinpe.TelefonoDestinatario.Length != 8)
                 throw new Exception("El teléfono debe tener 8 dígitos.");
 
+            var comercio = _sinpeRepository.ObtenerComercioPorTelefono(sinpe.TelefonoDestinatario);
+
+            if (comercio == null)
+                throw new Exception("El número destinatario no pertenece a ningún comercio registrado.");
+
+            var caja = _sinpeRepository.ObtenerCajaAbierta(comercio.IdComercio);
+
+            if (caja == null)
+                throw new Exception("El comercio no tiene una caja abierta.");
+
+            
+            sinpe.IdCaja = caja.IdCaja;
+
             sinpe.FechaDeRegistro = DateTime.Now;
-            sinpe.Estado = false;
+            sinpe.Estado = true;
 
             _sinpeRepository.Registrar(sinpe);
 
-            RegistrarBitacora("Sinpes", "Registrar",
-                "Registro exitoso",
+            _sinpeRepository.AgregarMontoACaja(caja.IdCaja, sinpe.Monto);
+
+            RegistrarBitacora(
+                "Sinpes",
+                "Registrar",
+                "SINPE registrado correctamente",
                 null,
                 null,
-                JsonSerializer.Serialize(sinpe));
+                JsonSerializer.Serialize(sinpe)
+            );
         }
         catch (Exception ex)
         {
-            RegistrarBitacora("Sinpes", "Error",
+            RegistrarBitacora(
+                "Sinpes",
+                "Error",
                 ex.Message,
                 ex.StackTrace,
                 null,
-                null);
+                null
+            );
 
             throw;
         }
@@ -59,19 +87,25 @@ public class SinpeBusiness
 
             _sinpeRepository.Editar(sinpe);
 
-            RegistrarBitacora("Sinpes", "Editar",
+            RegistrarBitacora(
+                "Sinpes",
+                "Editar",
                 "Edición exitosa",
                 null,
                 JsonSerializer.Serialize(anterior),
-                JsonSerializer.Serialize(sinpe));
+                JsonSerializer.Serialize(sinpe)
+            );
         }
         catch (Exception ex)
         {
-            RegistrarBitacora("Sinpes", "Error",
+            RegistrarBitacora(
+                "Sinpes",
+                "Error",
                 ex.Message,
                 ex.StackTrace,
                 null,
-                null);
+                null
+            );
 
             throw;
         }
@@ -85,19 +119,25 @@ public class SinpeBusiness
 
             _sinpeRepository.Eliminar(id);
 
-            RegistrarBitacora("Sinpes", "Eliminar",
+            RegistrarBitacora(
+                "Sinpes",
+                "Eliminar",
                 "Eliminación exitosa",
                 null,
                 JsonSerializer.Serialize(anterior),
-                null);
+                null
+            );
         }
         catch (Exception ex)
         {
-            RegistrarBitacora("Sinpes", "Error",
+            RegistrarBitacora(
+                "Sinpes",
+                "Error",
                 ex.Message,
                 ex.StackTrace,
                 null,
-                null);
+                null
+            );
 
             throw;
         }

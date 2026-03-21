@@ -1,0 +1,18 @@
+﻿@model MiProyectoMVC.Models.Comercio
+
+<h2>Eliminar Comercio</h2>
+
+<h3>¿Seguro que desea eliminar este comercio?</h3>
+
+<div>
+    <strong>@Model.Nombre</strong>
+</div>
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden" asp-for="IdComercio" />
+
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+</form>

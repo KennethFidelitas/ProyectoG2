@@ -17,17 +17,53 @@ public class SinpeRepository : ISinpeRepository
     }
 
     public void Registrar(Sinpe sinpe)
+{
+    using var connection = new MySqlConnection(_connectionString);
+
+    var sql = @"INSERT INTO Sinpes
+                (IdCaja, TelefonoOrigen, NombreOrigen, TelefonoDestinatario,
+                 NombreDestinatario, Monto, FechaDeRegistro, Descripcion, Estado)
+                VALUES
+                (@IdCaja, @TelefonoOrigen, @NombreOrigen, @TelefonoDestinatario,
+                 @NombreDestinatario, @Monto, @FechaDeRegistro, @Descripcion, @Estado)";
+
+    connection.Execute(sql, sinpe);
+}
+
+    public Comercio? ObtenerComercioPorTelefono(string telefono)
     {
         using var connection = new MySqlConnection(_connectionString);
 
-        var sql = @"INSERT INTO Sinpes
-                    (TelefonoOrigen, NombreOrigen, TelefonoDestinatario,
-                     NombreDestinatario, Monto, FechaDeRegistro, Descripcion, Estado)
-                    VALUES
-                    (@TelefonoOrigen, @NombreOrigen, @TelefonoDestinatario,
-                     @NombreDestinatario, @Monto, @FechaDeRegistro, @Descripcion, @Estado)";
+        var sql = @"SELECT *
+                    FROM Comercios
+                    WHERE Telefono = @Telefono
+                    AND Activo = true";
 
-        connection.Execute(sql, sinpe);
+        return connection.QueryFirstOrDefault<Comercio>(sql, new { Telefono = telefono });
+    }
+
+    public Caja? ObtenerCajaAbierta(int comercioId)
+    {
+        using var connection = new MySqlConnection(_connectionString);
+
+        var sql = @"SELECT *
+                    FROM Cajas
+                    WHERE ComercioId = @ComercioId
+                    AND EstaAbierta = true
+                    LIMIT 1";
+
+        return connection.QueryFirstOrDefault<Caja>(sql, new { ComercioId = comercioId });
+    }
+
+    public void AgregarMontoACaja(int idCaja, decimal monto)
+    {
+        using var connection = new MySqlConnection(_connectionString);
+
+        var sql = @"UPDATE Cajas
+                    SET MontoFinal = IFNULL(MontoFinal,0) + @Monto
+                    WHERE IdCaja = @IdCaja";
+
+        connection.Execute(sql, new { IdCaja = idCaja, Monto = monto });
     }
 
     public void Editar(Sinpe sinpe)
@@ -44,6 +80,7 @@ public class SinpeRepository : ISinpeRepository
     public void Eliminar(int id)
     {
         using var connection = new MySqlConnection(_connectionString);
+
         connection.Execute("DELETE FROM Sinpes WHERE IdSinpe = @Id", new { Id = id });
     }
 
@@ -64,4 +101,16 @@ public class SinpeRepository : ISinpeRepository
             "SELECT * FROM Sinpes ORDER BY FechaDeRegistro DESC"
         ).ToList();
     }
+
+    public List<Sinpe> ObtenerPorCaja(int idCaja)
+{
+    using var connection = new MySqlConnection(_connectionString);
+
+    var sql = @"SELECT *
+                FROM Sinpes
+                WHERE IdCaja = @IdCaja
+                ORDER BY FechaDeRegistro DESC";
+
+    return connection.Query<Sinpe>(sql, new { IdCaja = idCaja }).ToList();
+}
 }

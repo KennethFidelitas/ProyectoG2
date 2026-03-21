@@ -1,0 +1,48 @@
+﻿@model MiProyectoMVC.Models.Caja
+
+@{
+    ViewData["Title"] = "Cerrar Caja";
+}
+
+<h2>Cerrar Caja #@Model.IdCaja</h2>
+<hr />
+
+<div class="card mb-3" style="max-width: 400px;">
+    <div class="card-body">
+        <p><strong>Comercio:</strong> @Model.NombreComercio</p>
+
+        <p>
+            <strong>Apertura:</strong> @Model.FechaApertura.ToString("dd/MM/yyyy HH:mm")
+        </p>
+    </div>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="CerrarConfirmado" method="post">
+
+    <input type="hidden" name="idCaja" value="@Model.IdCaja" />
+
+    <div class="mb-3">
+        <label class="form-label">Monto Final en Caja</label>
+
+        <input type="number"
+               name="montoFinal"
+               step="0.01"
+               min="0"
+               class="form-control"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-info">
+        Confirmar Cierre
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

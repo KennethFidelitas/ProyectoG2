@@ -526,11 +526,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cerda\\Downloads\\SistemaSinpe\\MiProyectoMVC\\MiProyectoMVC.csproj",
+      "projectUniqueName": "C:\\Users\\cerda\\Downloads\\Nueva carpeta (11)\\Avance1-Progra\\MiProyectoMVC\\MiProyectoMVC.csproj",
       "projectName": "MiProyectoMVC",
-      "projectPath": "C:\\Users\\cerda\\Downloads\\SistemaSinpe\\MiProyectoMVC\\MiProyectoMVC.csproj",
+      "projectPath": "C:\\Users\\cerda\\Downloads\\Nueva carpeta (11)\\Avance1-Progra\\MiProyectoMVC\\MiProyectoMVC.csproj",
       "packagesPath": "C:\\Users\\cerda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cerda\\Downloads\\SistemaSinpe\\MiProyectoMVC\\obj\\",
+      "outputPath": "C:\\Users\\cerda\\Downloads\\Nueva carpeta (11)\\Avance1-Progra\\MiProyectoMVC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\cerda\\AppData\\Roaming\\NuGet\\NuGet.Config"

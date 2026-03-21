@@ -13,4 +13,5 @@ public class Sinpe
     public DateTime FechaDeRegistro { get; set; }
     public string? Descripcion { get; set; }
     public bool Estado { get; set; }
+    public int IdCaja { get; set; }
 }

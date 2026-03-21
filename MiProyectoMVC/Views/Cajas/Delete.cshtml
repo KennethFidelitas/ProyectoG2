@@ -1,0 +1,39 @@
+﻿@model MiProyectoMVC.Models.Caja
+
+@{
+    ViewData["Title"] = "Eliminar Caja";
+}
+
+<h2>Eliminar Caja</h2>
+<hr />
+
+<div class="alert alert-warning">
+    ¿Está seguro que desea eliminar la caja <strong>#@Model.IdCaja</strong> del comercio
+    <strong>@Model.NombreComercio</strong>?
+</div>
+
+<dl class="row">
+
+    <dt class="col-sm-3">Fecha Apertura</dt>
+    <dd class="col-sm-9">@Model.FechaApertura.ToString("dd/MM/yyyy HH:mm")</dd>
+
+    <dt class="col-sm-3">Estado</dt>
+    <dd class="col-sm-9">
+        @(Model.EstaAbierta ? "Abierta" : "Cerrada")
+    </dd>
+
+</dl>
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden" asp-for="IdCaja" />
+
+    <button type="submit" class="btn btn-danger">
+        Sí, Eliminar
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

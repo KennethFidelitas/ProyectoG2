@@ -13,22 +13,27 @@ public class SinpesController : Controller
         _business = business;
     }
 
-    
+    // GET
     public IActionResult Create()
     {
         return View();
     }
 
-    
+    // POST
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Create(Sinpe sinpe)
     {
         try
         {
+            if (!ModelState.IsValid)
+            {
+                return View(sinpe);
+            }
+
             _business.RegistrarSinpe(sinpe);
 
-            TempData["Success"] = "Pago SINPE registrado correctamente.";
+            TempData["Success"] = "SINPE realizado correctamente.";
 
             return RedirectToAction("Create");
         }

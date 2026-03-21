@@ -1,49 +1,61 @@
 /* /Views/Shared/_Layout.cshtml.rz.scp.css */
-/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand[b-jeg3itm05f] {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
 
-a[b-jeg3itm05f] {
-  color: #0077cc;
+.navbar-custom[b-jeg3itm05f] {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 6px 0;
+    transition: all 0.3s ease;
 }
 
-.btn-primary[b-jeg3itm05f] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+
+
+.navbar-custom:hover[b-jeg3itm05f] {
+    background-color: white;
+    border-bottom: 1px solid #e6e6e6;
 }
 
-.nav-pills .nav-link.active[b-jeg3itm05f], .nav-pills .show > .nav-link[b-jeg3itm05f] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+
+
+.navbar-brand[b-jeg3itm05f] {
+    font-size: 18px;
+    font-weight: 600;
+    color: white !important;
+    transition: color 0.3s;
 }
 
-.border-top[b-jeg3itm05f] {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom[b-jeg3itm05f] {
-  border-bottom: 1px solid #e5e5e5;
+
+
+.navbar-nav .nav-link[b-jeg3itm05f] {
+    color: white !important;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 12px;
+    padding: 4px 8px;
+    transition: color 0.3s;
 }
 
-.box-shadow[b-jeg3itm05f] {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+
+
+.navbar-custom:hover .navbar-brand[b-jeg3itm05f] {
+    color: #009ee3 !important;
 }
 
-button.accept-policy[b-jeg3itm05f] {
-  font-size: 1rem;
-  line-height: inherit;
+.navbar-custom:hover .nav-link[b-jeg3itm05f] {
+    color: #333 !important;
 }
+
+
+
+.navbar-nav .nav-link:hover[b-jeg3itm05f] {
+    color: #009ee3 !important;
+}
+
+
 
 .footer[b-jeg3itm05f] {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
 }

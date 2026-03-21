@@ -10,4 +10,9 @@ public interface ISinpeRepository
     void Eliminar(int id);
     Sinpe? ObtenerPorId(int id);
     List<Sinpe> ObtenerTodos();
+    List<Sinpe> ObtenerPorCaja(int idCaja);
+
+    Comercio? ObtenerComercioPorTelefono(string telefono);
+    Caja? ObtenerCajaAbierta(int comercioId);
+    void AgregarMontoACaja(int idCaja, decimal monto);
 }

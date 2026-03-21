@@ -1,0 +1,176 @@
+﻿@model List<MiProyectoMVC.Models.Caja>
+
+@{
+    ViewData["Title"] = "Cajas";
+}
+
+<h2>Cajas</h2>
+<hr />
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ Abrir Nueva Caja</a>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-dark">
+<tr>
+<th>#</th>
+<th>Comercio</th>
+<th>Fecha Apertura</th>
+<th>Fecha Cierre</th>
+<th>Estado</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+@foreach (var caja in Model)
+{
+<tr>
+
+<td>@caja.IdCaja</td>
+
+<td>@caja.NombreComercio</td>
+
+
+
+<td>@caja.FechaApertura.ToString("dd/MM/yyyy HH:mm")</td>
+
+<td>
+@(caja.FechaCierre.HasValue
+? caja.FechaCierre.Value.ToString("dd/MM/yyyy HH:mm")
+: "-")
+</td>
+
+<td>
+@if (caja.EstaAbierta)
+{
+<span class="badge bg-success">Abierta</span>
+}
+else
+{
+<span class="badge bg-secondary">Cerrada</span>
+}
+</td>
+
+<td>
+
+<button class="btn btn-sm btn-success"
+        onclick="verSinpes(@caja.IdCaja)">
+SINPES
+</button>
+
+<a asp-action="Edit"
+   asp-route-id="@caja.IdCaja"
+   class="btn btn-sm btn-warning">
+Editar
+</a>
+
+@if (caja.EstaAbierta)
+{
+<a asp-action="Cerrar"
+   asp-route-id="@caja.IdCaja"
+   class="btn btn-sm btn-info">
+Cerrar
+</a>
+}
+
+<a asp-action="Delete"
+   asp-route-id="@caja.IdCaja"
+   class="btn btn-sm btn-danger">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+}
+</tbody>
+
+</table>
+
+
+
+
+<div class="modal fade" id="modalSinpes" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+
+<div class="modal-header">
+<h5 class="modal-title">SINPES de la Caja</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body">
+
+<table class="table table-bordered">
+
+<thead class="table-dark">
+<tr>
+<th>ID</th>
+<th>Origen</th>
+<th>Destino</th>
+<th>Monto</th>
+<th>Fecha</th>
+<th>Descripción</th>
+</tr>
+</thead>
+
+<tbody id="tablaSinpes">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+<script>
+
+function verSinpes(idCaja)
+{
+
+fetch('/Cajas/ObtenerSinpes?idCaja=' + idCaja)
+
+.then(response => response.json())
+
+.then(data => {
+
+let tabla = document.getElementById("tablaSinpes");
+tabla.innerHTML = "";
+
+data.forEach(s => {
+
+tabla.innerHTML += `
+<tr>
+<td>${s.idSinpe}</td>
+<td>${s.nombreOrigen}</td>
+<td>${s.nombreDestinatario}</td>
+<td>₡${s.monto.toFixed(2)}</td>
+<td>${new Date(s.fechaDeRegistro).toLocaleString()}</td>
+<td>${s.descripcion ?? ""}</td>
+</tr>
+`;
+
+});
+
+var modal = new bootstrap.Modal(document.getElementById('modalSinpes'));
+modal.show();
+
+});
+
+}
+
+</script>
