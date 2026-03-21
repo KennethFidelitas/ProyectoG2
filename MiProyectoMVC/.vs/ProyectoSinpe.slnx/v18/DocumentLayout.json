@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|d:\\fidelitas\\progra avanzada\\proyectog2\\miproyectomvc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|d:\\fidelitas\\progra avanzada\\proyectog2\\miproyectomvc\\wwwroot\\js\\accesibilidad.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|solutionrelative:wwwroot\\js\\accesibilidad.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|d:\\fidelitas\\progra avanzada\\proyectog2\\miproyectomvc\\wwwroot\\css\\accesibilidad.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|solutionrelative:wwwroot\\css\\accesibilidad.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|d:\\fidelitas\\progra avanzada\\proyectog2\\miproyectomvc\\views\\cajas\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|solutionrelative:views\\cajas\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|d:\\fidelitas\\progra avanzada\\proyectog2\\miproyectomvc\\views\\bitacora\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2B7931A9-8172-E0A1-E7D4-197CA51BFB62}|MiProyectoMVC.csproj|solutionrelative:views\\bitacora\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\Views\\Cajas\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Cajas\\Create.cshtml",
+              "ToolTip": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\Views\\Cajas\\Create.cshtml",
+              "RelativeToolTip": "Views\\Cajas\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADgv1UAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-21T01:07:41.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "accesibilidad.js",
+              "DocumentMoniker": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\wwwroot\\js\\accesibilidad.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\accesibilidad.js",
+              "ToolTip": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\wwwroot\\js\\accesibilidad.js",
+              "RelativeToolTip": "wwwroot\\js\\accesibilidad.js",
+              "ViewState": "AgIAAMEAAAAAAAAAAAAswP8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-03-21T01:02:16.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "accesibilidad.css",
+              "DocumentMoniker": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\wwwroot\\css\\accesibilidad.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\accesibilidad.css",
+              "ToolTip": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\wwwroot\\css\\accesibilidad.css",
+              "RelativeToolTip": "wwwroot\\css\\accesibilidad.css",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAmwLAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-03-21T00:51:51.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAEEAAAAAAAAAAADwv3MAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-21T00:49:16.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\Views\\Bitacora\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Bitacora\\Index.cshtml",
+              "ToolTip": "D:\\Fidelitas\\Progra Avanzada\\ProyectoG2\\MiProyectoMVC\\Views\\Bitacora\\Index.cshtml",
+              "RelativeToolTip": "Views\\Bitacora\\Index.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADwAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-21T00:49:03.132Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

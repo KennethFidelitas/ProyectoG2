@@ -4,35 +4,82 @@
     ViewData["Title"] = "Abrir Caja";
 }
 
-<h2>Abrir Nueva Caja</h2>
-<hr />
+<h1>Abrir Nueva Caja</h1>
+<hr aria-hidden="true" />
 
-<form asp-action="Create" method="post">
+<div class="row">
+    <div class="col-md-6">
 
-    <div class="mb-3">
-        <label class="form-label">Comercio</label>
+        <form asp-action="Create"
+              method="post"
+              novalidate
+              aria-label="Formulario para abrir una nueva caja">
 
-        <select asp-for="ComercioId" asp-items="ViewBag.Comercios" class="form-select">
-            <option value="">-- Seleccione un comercio --</option>
-        </select>
+            @Html.AntiForgeryToken()
 
-        <span asp-validation-for="ComercioId" class="text-danger"></span>
+            <%-- Errores de modelo --%>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="acc-alerta acc-alerta-error"
+                     role="alert"
+                     aria-live="assertive"
+                     aria-atomic="true">
+                    <span aria-hidden="true">✖</span>
+                    <ul>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <div class="mb-3">
+                <label class="form-label" for="ComercioId">
+                    Comercio
+                    <span aria-hidden="true" style="color:#b00020;">*</span>
+                </label>
+
+                <select asp-for="ComercioId"
+                        asp-items="ViewBag.Comercios"
+                        id="ComercioId"
+                        class="form-select"
+                        required
+                        aria-required="true"
+                        aria-describedby="ComercioId-ayuda">
+                    <option value="">— Seleccione un comercio —</option>
+                </select>
+
+                <span id="ComercioId-ayuda" class="form-text">
+                    Selecciona el comercio al que pertenece esta caja.
+                </span>
+
+                <span asp-validation-for="ComercioId"
+                      class="field-error-msg"
+                      role="alert"></span>
+            </div>
+
+            <div class="d-flex gap-2 mt-3">
+                <button type="submit"
+                        class="btn btn-primary"
+                        aria-label="Confirmar y abrir nueva caja">
+                    Abrir Caja
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary"
+                   aria-label="Cancelar y volver a la lista de cajas">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+
     </div>
+</div>
 
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div class="alert alert-danger">
-            <ul>
-                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    <li>@error.ErrorMessage</li>
-                }
-            </ul>
-        </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
-    <button type="submit" class="btn btn-primary">Abrir Caja</button>
-
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-
-</form>
+}
