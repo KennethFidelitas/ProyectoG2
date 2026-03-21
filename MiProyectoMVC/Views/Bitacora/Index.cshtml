@@ -1,38 +1,59 @@
 @model List<BitacoraEvento>
 
-<h2>Bitácora de Eventos</h2>
+<h2 id="tituloBitacora">Bitácora de Eventos</h2>
 
-<table class="table table-striped">
 
-<thead>
-<tr>
-    <th>IdEvento</th>
-    <th>Tabla</th>
-    <th>Tipo</th>
-    <th>Fecha</th>
-    <th>Descripción</th>
-    <th>StackTrace</th>
-    <th>Datos Anteriores</th>
-    <th>Datos Posteriores</th>
-</tr>
-</thead>
+<div aria-live="polite" role="status">
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+</div>
 
-<tbody>
+<table class="table table-striped" role="table" aria-labelledby="tituloBitacora">
 
-@foreach (var item in Model)
-{
-<tr>
-    <td>@item.IdEvento</td>
-    <td>@item.TablaDeEvento</td>
-    <td>@item.TipoDeEvento</td>
-    <td>@item.FechaDeEvento</td>
-    <td>@item.DescripcionDeEvento</td>
-    <td>@item.StackTrace</td>
-    <td>@item.DatosAnteriores</td>
-    <td>@item.DatosPosteriores</td>
-</tr>
-}
+    <caption>Listado de eventos registrados en la bitácora del sistema</caption>
 
-</tbody>
+    <thead>
+        <tr>
+            <th scope="col">IdEvento</th>
+            <th scope="col">Tabla</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">StackTrace</th>
+            <th scope="col">Datos Anteriores</th>
+            <th scope="col">Datos Posteriores</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td aria-label="Id del evento">@item.IdEvento</td>
+                <td aria-label="Tabla afectada">@item.TablaDeEvento</td>
+                <td aria-label="Tipo de evento">@item.TipoDeEvento</td>
+                <td aria-label="Fecha del evento">@item.FechaDeEvento</td>
+                <td aria-label="Descripción del evento">@item.DescripcionDeEvento</td>
+
+       
+                <td aria-label="Detalle del error">
+                    @if (!string.IsNullOrEmpty(item.StackTrace))
+                    {
+                        <details>
+                            <summary>Ver detalle</summary>
+                            <pre>@item.StackTrace</pre>
+                        </details>
+                    }
+                </td>
+
+                <td aria-label="Datos antes del cambio">@item.DatosAnteriores</td>
+                <td aria-label="Datos después del cambio">@item.DatosPosteriores</td>
+            </tr>
+        }
+    </tbody>
 
 </table>
