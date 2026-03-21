@@ -1,18 +1,36 @@
 ﻿@model MiProyectoMVC.Models.Comercio
 
-<h2>Eliminar Comercio</h2>
+<h2 id="tituloEliminar">Eliminar Comercio</h2>
 
-<h3>¿Seguro que desea eliminar este comercio?</h3>
+<section aria-labelledby="tituloEliminar">
 
-<div>
-    <strong>@Model.Nombre</strong>
-</div>
+    <h3 id="mensajeConfirmacion">
+        ¿Seguro que desea eliminar este comercio?
+    </h3>
 
-<form asp-action="Delete" method="post">
+    <dl>
+        <dt>Nombre</dt>
+        <dd>@Model.Nombre</dd>
+    </dl>
 
-    <input type="hidden" asp-for="IdComercio" />
+    <form asp-action="Delete"
+          method="post"
+          aria-describedby="mensajeConfirmacion">
 
-    <button type="submit" class="btn btn-danger">Eliminar</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        <input type="hidden" asp-for="IdComercio" />
 
-</form>
+        <button type="submit"
+                class="btn btn-danger"
+                aria-label="Confirmar eliminación del comercio @Model.Nombre">
+            Eliminar
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary"
+           aria-label="Cancelar y volver a la lista de comercios">
+            Cancelar
+        </a>
+
+    </form>
+
+</section>

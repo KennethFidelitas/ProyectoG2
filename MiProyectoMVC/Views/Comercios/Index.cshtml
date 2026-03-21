@@ -1,33 +1,60 @@
 ﻿@model IEnumerable<MiProyectoMVC.Models.Comercio>
 
-<h2>Comercios</h2>
+<h2 id="tituloComercios">Comercios</h2>
 
-<a asp-action="Create" class="btn btn-primary">Nuevo Comercio</a>
+<!-- Botón accesible -->
+<a asp-action="Create"
+   class="btn btn-primary"
+   aria-label="Crear un nuevo comercio">
+    Nuevo Comercio
+</a>
 
-<table class="table">
+<table class="table" aria-labelledby="tituloComercios">
+
+    <caption>Listado de comercios registrados en el sistema</caption>
+
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Email</th>
-            <th></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Acciones</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Direccion</td>
-                <td>@item.Telefono</td>
-                <td>@item.Email</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.IdComercio">Detalles</a> |
-                    <a asp-action="Edit" asp-route-id="@item.IdComercio">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdComercio">Eliminar</a>
+                <td aria-label="Nombre del comercio">@item.Nombre</td>
+                <td aria-label="Dirección del comercio">@item.Direccion</td>
+                <td aria-label="Teléfono del comercio">@item.Telefono</td>
+                <td aria-label="Correo electrónico del comercio">@item.Email</td>
+
+                <td aria-label="Acciones disponibles">
+
+                    <a asp-action="Details"
+                       asp-route-id="@item.IdComercio"
+                       aria-label="Ver detalles del comercio @item.Nombre">
+                        Detalles
+                    </a> |
+
+                    <a asp-action="Edit"
+                       asp-route-id="@item.IdComercio"
+                       aria-label="Editar el comercio @item.Nombre">
+                        Editar
+                    </a> |
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.IdComercio"
+                       aria-label="Eliminar el comercio @item.Nombre">
+                        Eliminar
+                    </a>
+
                 </td>
             </tr>
         }
     </tbody>
+
 </table>

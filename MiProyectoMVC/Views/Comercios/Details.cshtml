@@ -1,8 +1,23 @@
 ﻿@model MiProyectoMVC.Models.Comercio
 
-<h2>Detalles</h2>
+<h2 id="tituloDetalles">Detalles del Comercio</h2>
 
-<p><strong>Nombre:</strong> @Model.Nombre</p>
-<p><strong>Dirección:</strong> @Model.Direccion</p>
-<p><strong>Teléfono:</strong> @Model.Telefono</p>
-<p><strong>Email:</strong> @Model.Email</p>
+<section aria-labelledby="tituloDetalles">
+
+    <dl>
+
+        <dt>Nombre</dt>
+        <dd>@Model.Nombre</dd>
+
+        <dt>Dirección</dt>
+        <dd>@Model.Direccion</dd>
+
+        <dt>Teléfono</dt>
+        <dd>@Model.Telefono</dd>
+
+        <dt>Email</dt>
+        <dd>@Model.Email</dd>
+
+    </dl>
+
+</section>
