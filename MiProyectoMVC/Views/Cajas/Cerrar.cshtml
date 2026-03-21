@@ -4,44 +4,48 @@
     ViewData["Title"] = "Cerrar Caja";
 }
 
-<h2>Cerrar Caja #@Model.IdCaja</h2>
+<h2 id="tituloCerrar">Cerrar Caja #@Model.IdCaja</h2>
 <hr />
 
-<div class="card mb-3" style="max-width: 400px;">
+<div class="card mb-3" style="max-width: 400px;" role="region" aria-labelledby="tituloCerrar">
     <div class="card-body">
         <p><strong>Comercio:</strong> @Model.NombreComercio</p>
-
-        <p>
-            <strong>Apertura:</strong> @Model.FechaApertura.ToString("dd/MM/yyyy HH:mm")
-        </p>
+        <p><strong>Apertura:</strong> @Model.FechaApertura.ToString("dd/MM/yyyy HH:mm")</p>
     </div>
 </div>
 
 @if (TempData["Error"] != null)
 {
-    <div class="alert alert-danger">@TempData["Error"]</div>
+    <div class="alert alert-danger" role="alert" aria-live="assertive">
+        @TempData["Error"]
+    </div>
 }
 
-<form asp-action="CerrarConfirmado" method="post">
+<form asp-action="CerrarConfirmado"
+      method="post"
+      role="form"
+      aria-labelledby="tituloCerrar">
 
     <input type="hidden" name="idCaja" value="@Model.IdCaja" />
 
     <div class="mb-3">
-        <label class="form-label">Monto Final en Caja</label>
+        <label for="montoFinal" class="form-label">Monto Final en Caja</label>
 
         <input type="number"
+               id="montoFinal"
                name="montoFinal"
                step="0.01"
                min="0"
                class="form-control"
-               required />
+               required
+               aria-required="true" />
     </div>
 
-    <button type="submit" class="btn btn-info">
+    <button type="submit" class="btn btn-info" aria-label="Confirmar cierre de caja">
         Confirmar Cierre
     </button>
 
-    <a asp-action="Index" class="btn btn-secondary">
+    <a asp-action="Index" class="btn btn-secondary" aria-label="Cancelar cierre">
         Cancelar
     </a>
 

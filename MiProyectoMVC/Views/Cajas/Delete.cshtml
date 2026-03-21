@@ -4,16 +4,17 @@
     ViewData["Title"] = "Eliminar Caja";
 }
 
-<h2>Eliminar Caja</h2>
+<h2 id="tituloDelete">Eliminar Caja</h2>
 <hr />
 
-<div class="alert alert-warning">
+<div class="alert alert-warning"
+     role="alert"
+     aria-live="assertive">
     ¿Está seguro que desea eliminar la caja <strong>#@Model.IdCaja</strong> del comercio
     <strong>@Model.NombreComercio</strong>?
 </div>
 
 <dl class="row">
-
     <dt class="col-sm-3">Fecha Apertura</dt>
     <dd class="col-sm-9">@Model.FechaApertura.ToString("dd/MM/yyyy HH:mm")</dd>
 
@@ -21,18 +22,24 @@
     <dd class="col-sm-9">
         @(Model.EstaAbierta ? "Abierta" : "Cerrada")
     </dd>
-
 </dl>
 
-<form asp-action="Delete" method="post">
+<form asp-action="Delete"
+      method="post"
+      role="form"
+      aria-labelledby="tituloDelete">
 
     <input type="hidden" asp-for="IdCaja" />
 
-    <button type="submit" class="btn btn-danger">
+    <button type="submit"
+            class="btn btn-danger"
+            aria-label="Confirmar eliminación de caja">
         Sí, Eliminar
     </button>
 
-    <a asp-action="Index" class="btn btn-secondary">
+    <a asp-action="Index"
+       class="btn btn-secondary"
+       aria-label="Cancelar eliminación">
         Cancelar
     </a>
 

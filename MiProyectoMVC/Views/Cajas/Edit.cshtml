@@ -4,42 +4,53 @@
     ViewData["Title"] = "Editar Caja";
 }
 
-<h2>Editar Caja #@Model.IdCaja</h2>
+<h2 id="tituloEdit">Editar Caja #@Model.IdCaja</h2>
 <hr />
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit"
+      method="post"
+      role="form"
+      aria-labelledby="tituloEdit">
 
-    <input type="hidden" asp-for="IdCaja" />
+<input type="hidden" asp-for="IdCaja" />
 
-    <div class="mb-3">
-        <label class="form-label">Comercio</label>
+<div class="mb-3">
+<label for="ComercioId" class="form-label">Comercio</label>
 
-        <select asp-for="ComercioId"
-                asp-items="ViewBag.Comercios"
-                class="form-select">
-        </select>
+<select asp-for="ComercioId"
+        asp-items="ViewBag.Comercios"
+        id="ComercioId"
+        class="form-select"
+        aria-required="true">
+</select>
 
-        <span asp-validation-for="ComercioId" class="text-danger"></span>
-    </div>
+<span asp-validation-for="ComercioId"
+      class="text-danger"
+      role="alert"></span>
+</div>
 
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div class="alert alert-danger">
-            <ul>
-                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    <li>@error.ErrorMessage</li>
-                }
-            </ul>
-        </div>
-    }
+@if (!ViewData.ModelState.IsValid)
+{
+<div class="alert alert-danger" role="alert" aria-live="assertive">
+<ul>
+@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+{
+<li>@error.ErrorMessage</li>
+}
+</ul>
+</div>
+}
 
-    <button type="submit" class="btn btn-warning">
-        Guardar Cambios
-    </button>
+<button type="submit"
+        class="btn btn-warning"
+        aria-label="Guardar cambios">
+    Guardar Cambios
+</button>
 
-    <a asp-action="Index" class="btn btn-secondary">
-        Cancelar
-    </a>
+<a asp-action="Index"
+   class="btn btn-secondary"
+   aria-label="Cancelar edición">
+    Cancelar
+</a>
 
 </form>
