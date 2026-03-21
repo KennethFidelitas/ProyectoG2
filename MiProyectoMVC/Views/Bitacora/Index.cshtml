@@ -1,93 +1,59 @@
 @model List<BitacoraEvento>
 
-@{
-    ViewData["Title"] = "Bitácora";
-}
+<h2 id="tituloBitacora">Bitácora de Eventos</h2>
 
-<h1>Bitácora de Eventos</h1>
 
-<div class="tabla-scroll"
-     tabindex="0"
-     role="region"
-     aria-label="Bitácora de eventos del sistema — desplazamiento horizontal disponible">
-
-    <table class="table table-striped" aria-describedby="bitacora-caption">
-
-        <caption id="bitacora-caption" class="visually-hidden">
-            Registro de eventos del sistema: identificador, tabla afectada, tipo de evento,
-            fecha, descripción, traza de error, datos anteriores y datos posteriores.
-        </caption>
-
-        <thead>
-            <tr>
-                <th scope="col">ID Evento</th>
-                <th scope="col">Tabla</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Stack Trace</th>
-                <th scope="col">Datos Anteriores</th>
-                <th scope="col">Datos Posteriores</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.IdEvento</td>
-                    <td>@item.TablaDeEvento</td>
-                    <td>
-                        <span class="badge @(item.TipoDeEvento == "ERROR" ? "bg-danger" : "bg-secondary")"
-                              aria-label="Tipo: @item.TipoDeEvento">
-                            @item.TipoDeEvento
-                        </span>
-                    </td>
-                    <td>
-                        <time datetime="@item.FechaDeEvento.ToString("o")">
-                            @item.FechaDeEvento
-                        </time>
-                    </td>
-                    <td>@item.DescripcionDeEvento</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(item.StackTrace))
-                        {
-                            <details>
-                                <summary aria-label="Ver traza de error del evento @item.IdEvento">
-                                    Ver traza
-                                </summary>
-                                <pre style="font-size:0.75rem;white-space:pre-wrap;">@item.StackTrace</pre>
-                            </details>
-                        }
-                        else
-                        {
-                            <span aria-label="Sin traza de error">—</span>
-                        }
-                    </td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(item.DatosAnteriores))
-                        {
-                            <details>
-                                <summary aria-label="Ver datos anteriores del evento @item.IdEvento">Ver</summary>
-                                <pre style="font-size:0.75rem;white-space:pre-wrap;">@item.DatosAnteriores</pre>
-                            </details>
-                        }
-                        else { <span aria-label="Sin datos anteriores">—</span> }
-                    </td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(item.DatosPosteriores))
-                        {
-                            <details>
-                                <summary aria-label="Ver datos posteriores del evento @item.IdEvento">Ver</summary>
-                                <pre style="font-size:0.75rem;white-space:pre-wrap;">@item.DatosPosteriores</pre>
-                            </details>
-                        }
-                        else { <span aria-label="Sin datos posteriores">—</span> }
-                    </td>
-                </tr>
-            }
-        </tbody>
-
-    </table>
-
+<div aria-live="polite" role="status">
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
 </div>
+
+<table class="table table-striped" role="table" aria-labelledby="tituloBitacora">
+
+    <caption>Listado de eventos registrados en la bitácora del sistema</caption>
+
+    <thead>
+        <tr>
+            <th scope="col">IdEvento</th>
+            <th scope="col">Tabla</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">StackTrace</th>
+            <th scope="col">Datos Anteriores</th>
+            <th scope="col">Datos Posteriores</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td aria-label="Id del evento">@item.IdEvento</td>
+                <td aria-label="Tabla afectada">@item.TablaDeEvento</td>
+                <td aria-label="Tipo de evento">@item.TipoDeEvento</td>
+                <td aria-label="Fecha del evento">@item.FechaDeEvento</td>
+                <td aria-label="Descripción del evento">@item.DescripcionDeEvento</td>
+
+
+                <td aria-label="Detalle del error">
+                    @if (!string.IsNullOrEmpty(item.StackTrace))
+                    {
+                        <details>
+                            <summary>Ver detalle</summary>
+                            <pre>@item.StackTrace</pre>
+                        </details>
+                    }
+                </td>
+
+                <td aria-label="Datos antes del cambio">@item.DatosAnteriores</td>
+                <td aria-label="Datos después del cambio">@item.DatosPosteriores</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

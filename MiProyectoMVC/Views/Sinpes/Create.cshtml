@@ -4,55 +4,96 @@
     ViewData["Title"] = "Registrar Pago SINPE";
 }
 
-<h2>Registrar Pago SINPE</h2>
+<h2 id="tituloFormulario">Registrar Pago SINPE</h2>
 
 <hr />
 
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-success alert-dismissible fade show">
+    <div class="alert alert-success alert-dismissible fade show"
+         role="alert"
+         aria-live="polite">
         @TempData["Success"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Cerrar mensaje"></button>
     </div>
 }
 
-<form asp-action="Create" method="post">
+<form asp-action="Create"
+      method="post"
+      role="form"
+      aria-labelledby="tituloFormulario">
 
-    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-    <div class="form-group">
-        <label>Teléfono Origen</label>
-        <input asp-for="TelefonoOrigen" class="form-control" maxlength="8" required />
+    <div asp-validation-summary="ModelOnly"
+         class="alert alert-danger"
+         role="alert"
+         aria-live="assertive">
     </div>
 
     <div class="form-group">
-        <label>Nombre Origen</label>
-        <input asp-for="NombreOrigen" class="form-control" required />
+        <label for="TelefonoOrigen">Teléfono Origen</label>
+        <input asp-for="TelefonoOrigen"
+               id="TelefonoOrigen"
+               class="form-control"
+               maxlength="8"
+               required
+               aria-required="true" />
     </div>
 
     <div class="form-group">
-        <label>Teléfono Destinatario</label>
-        <input asp-for="TelefonoDestinatario" class="form-control" maxlength="8" required />
+        <label for="NombreOrigen">Nombre Origen</label>
+        <input asp-for="NombreOrigen"
+               id="NombreOrigen"
+               class="form-control"
+               required
+               aria-required="true" />
     </div>
 
     <div class="form-group">
-        <label>Nombre Destinatario</label>
-        <input asp-for="NombreDestinatario" class="form-control" required />
+        <label for="TelefonoDestinatario">Teléfono Destinatario</label>
+        <input asp-for="TelefonoDestinatario"
+               id="TelefonoDestinatario"
+               class="form-control"
+               maxlength="8"
+               required
+               aria-required="true" />
     </div>
 
     <div class="form-group">
-        <label>Monto</label>
-        <input asp-for="Monto" type="number" step="0.01" class="form-control" required />
+        <label for="NombreDestinatario">Nombre Destinatario</label>
+        <input asp-for="NombreDestinatario"
+               id="NombreDestinatario"
+               class="form-control"
+               required
+               aria-required="true" />
     </div>
 
     <div class="form-group">
-        <label>Descripción</label>
-        <input asp-for="Descripcion" class="form-control" maxlength="50" />
+        <label for="Monto">Monto</label>
+        <input asp-for="Monto"
+               id="Monto"
+               type="number"
+               step="0.01"
+               class="form-control"
+               required
+               aria-required="true" />
+    </div>
+
+    <div class="form-group">
+        <label for="Descripcion">Descripción</label>
+        <input asp-for="Descripcion"
+               id="Descripcion"
+               class="form-control"
+               maxlength="50" />
     </div>
 
     <br />
 
-    <button type="submit" class="btn btn-primary">
+    <button type="submit"
+            class="btn btn-primary"
+            aria-label="Registrar pago SINPE">
         Registrar Pago
     </button>
 

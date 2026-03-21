@@ -4,173 +4,191 @@
     ViewData["Title"] = "Cajas";
 }
 
-<h2>Cajas</h2>
+<h2 id="tituloIndex">Cajas</h2>
 <hr />
 
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-success">@TempData["Success"]</div>
+    <div class="alert alert-success" role="alert" aria-live="polite">
+        @TempData["Success"]
+    </div>
 }
 
 @if (TempData["Error"] != null)
 {
-    <div class="alert alert-danger">@TempData["Error"]</div>
+    <div class="alert alert-danger" role="alert" aria-live="assertive">
+        @TempData["Error"]
+    </div>
 }
 
-<a asp-action="Create" class="btn btn-primary mb-3">+ Abrir Nueva Caja</a>
-
-<table class="table table-bordered table-hover">
-
-<thead class="table-dark">
-<tr>
-<th>#</th>
-<th>Comercio</th>
-<th>Fecha Apertura</th>
-<th>Fecha Cierre</th>
-<th>Estado</th>
-<th>Acciones</th>
-</tr>
-</thead>
-
-<tbody>
-@foreach (var caja in Model)
-{
-<tr>
-
-<td>@caja.IdCaja</td>
-
-<td>@caja.NombreComercio</td>
-
-
-
-<td>@caja.FechaApertura.ToString("dd/MM/yyyy HH:mm")</td>
-
-<td>
-@(caja.FechaCierre.HasValue
-? caja.FechaCierre.Value.ToString("dd/MM/yyyy HH:mm")
-: "-")
-</td>
-
-<td>
-@if (caja.EstaAbierta)
-{
-<span class="badge bg-success">Abierta</span>
-}
-else
-{
-<span class="badge bg-secondary">Cerrada</span>
-}
-</td>
-
-<td>
-
-<button class="btn btn-sm btn-success"
-        onclick="verSinpes(@caja.IdCaja)">
-SINPES
-</button>
-
-<a asp-action="Edit"
-   asp-route-id="@caja.IdCaja"
-   class="btn btn-sm btn-warning">
-Editar
+<a asp-action="Create"
+   class="btn btn-primary mb-3"
+   aria-label="Abrir nueva caja">
+    + Abrir Nueva Caja
 </a>
 
-@if (caja.EstaAbierta)
-{
-<a asp-action="Cerrar"
-   asp-route-id="@caja.IdCaja"
-   class="btn btn-sm btn-info">
-Cerrar
-</a>
-}
+<table class="table table-bordered table-hover"
+       role="table"
+       aria-labelledby="tituloIndex">
 
-<a asp-action="Delete"
-   asp-route-id="@caja.IdCaja"
-   class="btn btn-sm btn-danger">
-Eliminar
-</a>
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Comercio</th>
+            <th scope="col">Fecha Apertura</th>
+            <th scope="col">Fecha Cierre</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
 
-</td>
+    <tbody>
+        @foreach (var caja in Model)
+        {
+            <tr>
 
-</tr>
-}
-</tbody>
+                <td>@caja.IdCaja</td>
+
+                <td>@caja.NombreComercio</td>
+
+                <td>@caja.FechaApertura.ToString("dd/MM/yyyy HH:mm")</td>
+
+                <td>
+                    @(caja.FechaCierre.HasValue
+                                    ? caja.FechaCierre.Value.ToString("dd/MM/yyyy HH:mm")
+                                    : "-")
+                </td>
+
+                <td>
+                    @if (caja.EstaAbierta)
+                    {
+                        <span class="badge bg-success">Abierta</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Cerrada</span>
+                    }
+                </td>
+
+                <td>
+
+                    <button class="btn btn-sm btn-success"
+                            onclick="verSinpes(@caja.IdCaja)"
+                            aria-label="Ver sinpes de la caja @caja.IdCaja">
+                        SINPES
+                    </button>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@caja.IdCaja"
+                       class="btn btn-sm btn-warning"
+                       aria-label="Editar caja @caja.IdCaja">
+                        Editar
+                    </a>
+
+                    @if (caja.EstaAbierta)
+                    {
+                        <a asp-action="Cerrar"
+                           asp-route-id="@caja.IdCaja"
+                           class="btn btn-sm btn-info"
+                           aria-label="Cerrar caja @caja.IdCaja">
+                            Cerrar
+                        </a>
+                    }
+
+                    <a asp-action="Delete"
+                       asp-route-id="@caja.IdCaja"
+                       class="btn btn-sm btn-danger"
+                       aria-label="Eliminar caja @caja.IdCaja">
+                        Eliminar
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
 
 </table>
 
+<!-- MODAL ACCESIBLE -->
+<div class="modal fade"
+     id="modalSinpes"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="tituloModalSinpes"
+     aria-hidden="true">
 
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
 
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModalSinpes">
+                    SINPES de la Caja
+                </h5>
 
-<div class="modal fade" id="modalSinpes" tabindex="-1">
-<div class="modal-dialog modal-lg">
-<div class="modal-content">
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar ventana">
+                </button>
+            </div>
 
-<div class="modal-header">
-<h5 class="modal-title">SINPES de la Caja</h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-body">
+
+                <table class="table table-bordered" role="table">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Origen</th>
+                            <th scope="col">Destino</th>
+                            <th scope="col">Monto</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Descripción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaSinpes">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
 </div>
-
-<div class="modal-body">
-
-<table class="table table-bordered">
-
-<thead class="table-dark">
-<tr>
-<th>ID</th>
-<th>Origen</th>
-<th>Destino</th>
-<th>Monto</th>
-<th>Fecha</th>
-<th>Descripción</th>
-</tr>
-</thead>
-
-<tbody id="tablaSinpes">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-</div>
-</div>
-
 
 <script>
 
-function verSinpes(idCaja)
-{
+    function verSinpes(idCaja)
+    {
+        fetch('/Cajas/ObtenerSinpes?idCaja=' + idCaja)
+        .then(response => response.json())
+        .then(data => {
 
-fetch('/Cajas/ObtenerSinpes?idCaja=' + idCaja)
+            let tabla = document.getElementById("tablaSinpes");
+            tabla.innerHTML = "";
 
-.then(response => response.json())
+            data.forEach(s => {
 
-.then(data => {
+                tabla.innerHTML += `
+                <tr>
+                    <td>${s.idSinpe}</td>
+                    <td>${s.nombreOrigen}</td>
+                    <td>${s.nombreDestinatario}</td>
+                    <td>₡${s.monto.toFixed(2)}</td>
+                    <td>${new Date(s.fechaDeRegistro).toLocaleString()}</td>
+                    <td>${s.descripcion ?? ""}</td>
+                </tr>
+                `;
+            });
 
-let tabla = document.getElementById("tablaSinpes");
-tabla.innerHTML = "";
+            anunciar("Mostrando sinpes de la caja");
 
-data.forEach(s => {
-
-tabla.innerHTML += `
-<tr>
-<td>${s.idSinpe}</td>
-<td>${s.nombreOrigen}</td>
-<td>${s.nombreDestinatario}</td>
-<td>₡${s.monto.toFixed(2)}</td>
-<td>${new Date(s.fechaDeRegistro).toLocaleString()}</td>
-<td>${s.descripcion ?? ""}</td>
-</tr>
-`;
-
-});
-
-var modal = new bootstrap.Modal(document.getElementById('modalSinpes'));
-modal.show();
-
-});
-
-}
+            var modal = new bootstrap.Modal(document.getElementById('modalSinpes'));
+            modal.show();
+        });
+    }
 
 </script>

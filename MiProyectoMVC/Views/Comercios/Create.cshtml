@@ -1,29 +1,65 @@
 ﻿@model MiProyectoMVC.Models.Comercio
 
-<h2>Crear Comercio</h2>
+<h2 id="tituloCrear">Crear Comercio</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" method="post" aria-labelledby="tituloCrear">
 
-    <div>
-        <label>Nombre</label>
-        <input asp-for="Nombre" class="form-control" />
+    <!-- Resumen de errores accesible -->
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"
+         role="alert"
+         aria-live="assertive">
     </div>
 
-    <div>
-        <label>Dirección</label>
-        <input asp-for="Direccion" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre"
+               class="form-control"
+               aria-required="true" />
+        <span asp-validation-for="Nombre"
+              class="text-danger"
+              role="alert">
+        </span>
     </div>
 
-    <div>
-        <label>Teléfono</label>
-        <input asp-for="Telefono" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="Direccion" class="form-label"></label>
+        <input asp-for="Direccion"
+               class="form-control"
+               aria-required="true" />
+        <span asp-validation-for="Direccion"
+              class="text-danger"
+              role="alert">
+        </span>
     </div>
 
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
+    <div class="mb-3">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input asp-for="Telefono"
+               class="form-control"
+               aria-required="true" />
+        <span asp-validation-for="Telefono"
+              class="text-danger"
+              role="alert">
+        </span>
     </div>
 
-    <button type="submit" class="btn btn-success">Guardar</button>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email"
+               class="form-control"
+               type="email"
+               aria-required="true" />
+        <span asp-validation-for="Email"
+              class="text-danger"
+              role="alert">
+        </span>
+    </div>
+
+    <button type="submit"
+            class="btn btn-success"
+            aria-label="Guardar nuevo comercio">
+        Guardar
+    </button>
 
 </form>
