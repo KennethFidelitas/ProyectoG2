@@ -1,0 +1,39 @@
+﻿@model MiProyectoMVC.Models.Comercio
+
+@{
+    ViewData["Title"] = "Eliminar Comercio";
+}
+
+<h2 id="tituloEliminar">Eliminar Comercio</h2>
+<hr />
+
+<div class="alert alert-warning">
+    ¿Seguro que desea eliminar el comercio <strong>@Model.Nombre</strong>?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Nombre</dt>
+    <dd class="col-sm-9">@Model.Nombre</dd>
+
+    <dt class="col-sm-3">Dirección</dt>
+    <dd class="col-sm-9">@Model.Direccion</dd>
+
+    <dt class="col-sm-3">Teléfono</dt>
+    <dd class="col-sm-9">@Model.Telefono</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="IdComercio" />
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

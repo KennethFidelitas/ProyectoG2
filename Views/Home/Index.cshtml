@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<style>
+
+    .hero {
+        position: relative;
+        width: 100vw;
+        height: 520px;
+        margin-left: calc(-50vw + 50%);
+        background-image: url('/images/home-bg2.jpg');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+    }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient( 90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.05) 80% );
+        }
+
+    .hero-text {
+        position: relative;
+        color: white;
+        max-width: 600px;
+        margin-left: 140px;
+    }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            margin-top: 15px;
+        }
+
+    .cards-section {
+        margin-top: -130px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .card-box {
+        background: white;
+        padding: 35px;
+        border-radius: 14px;
+        box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+        text-align: center;
+        transition: 0.3s;
+    }
+
+        .card-box:hover {
+            transform: translateY(-6px);
+        }
+
+        .card-box img {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+
+        .card-box h4 {
+            font-weight: 600;
+        }
+
+        .card-box p {
+            color: #555;
+            margin-top: 10px;
+        }
+
+    .btn-primary {
+        margin-top: 15px;
+        padding: 10px 22px;
+        border-radius: 8px;
+    }
+
+</style>
+
+
+<!-- HERO como sección accesible -->
+<section class="hero" role="banner" aria-label="Sección principal de bienvenida">
+
+    <div class="hero-text">
+
+        <h1>
+            DE AHORA EN ADELANTE,<br>
+            MANEJA <br>
+            TU DINERO
+        </h1>
+
+        <p>
+            Paga, cobra y maneja tus finanzas desde un solo lugar.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- Sección de opciones -->
+<section class="container cards-section" aria-labelledby="opcionesTitulo">
+
+    <h2 id="opcionesTitulo" class="visually-hidden">
+        Opciones principales del sistema
+    </h2>
+
+    <div class="row justify-content-center g-4">
+
+        <div class="col-md-5">
+
+            <div class="card-box" role="region" aria-labelledby="sinpeTitulo">
+
+                <h4 id="sinpeTitulo">Registrar pagos SINPE</h4>
+
+                <img src="/images/imagen1.png"
+                     alt="Ilustración para registrar pagos SINPE en el sistema" />
+
+                <p>
+                    Registra pagos SINPE de forma rápida
+                    y segura dentro del sistema.
+                </p>
+
+                <a asp-controller="Sinpes"
+                   asp-action="Create"
+                   class="btn btn-primary"
+                   aria-label="Ir a la página para registrar un pago SINPE">
+                    Registrar pago
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-5">
+
+            <div class="card-box" role="region" aria-labelledby="cajasTitulo">
+
+                <h4 id="cajasTitulo">Gestión de Cajas</h4>
+
+                <img src="/images/imagen2.png"
+                     alt="Ilustración de gestión y consulta de cajas del sistema" />
+
+                <p>
+                    Consulta las cajas activas
+                    y revisa los SINPE recibidos.
+                </p>
+
+                <a asp-controller="Cajas"
+                   asp-action="Index"
+                   class="btn btn-primary"
+                   aria-label="Ir a la página para ver las cajas activas">
+                    Ver cajas
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

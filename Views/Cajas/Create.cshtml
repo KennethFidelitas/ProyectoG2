@@ -1,0 +1,36 @@
+﻿@model MiProyectoMVC.Models.Caja
+
+@{
+    ViewData["Title"] = "Crear Caja";
+}
+
+<h2>Crear Nueva Caja</h2>
+
+<hr />
+
+<form asp-action="Create" method="post">
+
+    <div class="form-group">
+        <label>Comercio</label>
+        <select asp-for="ComercioId" class="form-control"
+                asp-items="ViewBag.Comercios">
+            <option value="">-- Seleccione un comercio --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Fecha Apertura</label>
+        <input asp-for="FechaApertura" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Estado</label><br />
+        <input asp-for="EstaAbierta" type="checkbox" /> Abierta
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+</form>

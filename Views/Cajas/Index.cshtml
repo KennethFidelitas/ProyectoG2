@@ -1,0 +1,178 @@
+﻿@model List<MiProyectoMVC.Models.Caja>
+
+@{
+    ViewData["Title"] = "Cajas";
+}
+
+<h2 id="tituloIndex">Cajas</h2>
+<hr />
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    + Abrir Nueva Caja
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Comercio</th>
+            <th>Apertura</th>
+            <th>Cierre</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var caja in Model)
+        {
+            <tr>
+                <td>@caja.IdCaja</td>
+                <td>@caja.Comercio?.Nombre</td>
+                <td>@caja.FechaApertura.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@(caja.FechaCierre?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td>
+
+                <td>
+                    @if (caja.EstaAbierta)
+                    {
+                        <span class="badge bg-success">Abierta</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Cerrada</span>
+                    }
+                </td>
+
+                <td>
+
+                    <button class="btn btn-sm btn-success"
+                            onclick="verSinpes(@caja.IdCaja)">
+                        SINPES
+                    </button>
+
+                    <a asp-action="Edit" asp-route-id="@caja.IdCaja" class="btn btn-sm btn-warning">
+                        Editar
+                    </a>
+
+                    @if (caja.EstaAbierta)
+                    {
+                        <a asp-action="Cerrar" asp-route-id="@caja.IdCaja" class="btn btn-sm btn-info">
+                            Cerrar
+                        </a>
+                    }
+
+                    <a asp-action="Delete" asp-route-id="@caja.IdCaja" class="btn btn-sm btn-danger">
+                        Eliminar
+                    </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<!-- MODAL -->
+<div class="modal fade" id="modalSinpes" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">SINPES de la Caja</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- TOTAL -->
+                <div class="mb-2">
+                    <strong>Total recibido:</strong>
+                    <span id="totalSinpes">₡0.00</span>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaSinpes"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+function verSinpes(idCaja) {
+
+    fetch('/Cajas/ObtenerSinpes?idCaja=' + idCaja)
+    .then(res => {
+        if (!res.ok) throw new Error("Error HTTP: " + res.status);
+        return res.json();
+    })
+    .then(data => {
+
+        console.log("SINPES:", data);
+
+        let tabla = document.getElementById("tablaSinpes");
+        let totalLabel = document.getElementById("totalSinpes");
+
+        tabla.innerHTML = "";
+
+        if (!data || data.length === 0) {
+            tabla.innerHTML = `<tr><td colspan="6">No hay registros</td></tr>`;
+            totalLabel.innerText = "₡0.00";
+        } else {
+
+            // 🔥 ORDENAR POR FECHA DESC
+            data.sort((a, b) => new Date(b.fechaDeRegistro) - new Date(a.fechaDeRegistro));
+
+            let total = 0;
+
+            data.forEach(s => {
+                total += s.monto;
+
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${s.idSinpe}</td>
+                        <td>${s.nombreOrigen}</td>
+                        <td>${s.nombreDestinatario}</td>
+                        <td>₡${s.monto.toFixed(2)}</td>
+                        <td>${new Date(s.fechaDeRegistro).toLocaleString()}</td>
+                        <td>${s.descripcion ?? ""}</td>
+                    </tr>
+                `;
+            });
+
+            totalLabel.innerText = "₡" + total.toFixed(2);
+        }
+
+        var modal = new bootstrap.Modal(document.getElementById('modalSinpes'));
+        modal.show();
+    })
+    .catch(err => {
+        console.error("ERROR:", err);
+        alert("Error al cargar los SINPES");
+    });
+}
+
+</script>

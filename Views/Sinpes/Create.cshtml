@@ -1,0 +1,101 @@
+@model MiProyectoMVC.Models.Sinpe
+
+@{
+    ViewData["Title"] = "Registrar Pago SINPE";
+}
+
+<h2 id="tituloFormulario">Registrar Pago SINPE</h2>
+<hr />
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<form asp-action="Create" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="TelefonoOrigen" class="form-label"></label>
+        <input asp-for="TelefonoOrigen"
+               class="form-control"
+               maxlength="8"
+               placeholder="88888888"
+               required />
+        <span asp-validation-for="TelefonoOrigen" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NombreOrigen" class="form-label"></label>
+        <input asp-for="NombreOrigen"
+               class="form-control"
+               placeholder="Nombre del cliente"
+               required />
+        <span asp-validation-for="NombreOrigen" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TelefonoDestinatario" class="form-label"></label>
+        <input asp-for="TelefonoDestinatario"
+               class="form-control"
+               maxlength="8"
+               placeholder="88888888"
+               required />
+        <span asp-validation-for="TelefonoDestinatario" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NombreDestinatario" class="form-label"></label>
+        <input asp-for="NombreDestinatario"
+               class="form-control"
+               placeholder="Nombre del comercio"
+               required />
+        <span asp-validation-for="NombreDestinatario" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Monto" class="form-label"></label>
+        <input asp-for="Monto"
+               type="number"
+               step="0.01"
+               min="1"
+               class="form-control"
+               placeholder="₡0.00"
+               required />
+        <span asp-validation-for="Monto" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-label"></label>
+        <input asp-for="Descripcion"
+               class="form-control"
+               maxlength="50"
+               placeholder="Opcional" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Registrar Pago
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

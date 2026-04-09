@@ -1,0 +1,52 @@
+﻿@model MiProyectoMVC.Models.Caja
+
+@{
+    ViewData["Title"] = "Editar Caja";
+}
+
+<h2 id="tituloEdit">Editar Caja #@Model.IdCaja</h2>
+<hr />
+
+<form asp-action="Edit" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="IdCaja" />
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="mb-3">
+        <label asp-for="ComercioId" class="form-label"></label>
+
+        <select asp-for="ComercioId"
+                asp-items="ViewBag.Comercios"
+                class="form-select"
+                required>
+        </select>
+
+        <span asp-validation-for="ComercioId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-warning">
+        Guardar Cambios
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

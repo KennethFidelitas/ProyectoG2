@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MiProyectoMVC.Models.Comercio>
+
+@{
+    ViewData["Title"] = "Comercios";
+}
+
+<h2 id="tituloComercios">Comercios</h2>
+<hr />
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    + Nuevo Comercio
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="5" class="text-center">
+                    No hay comercios registrados
+                </td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Direccion</td>
+                    <td>@item.Telefono</td>
+                    <td>@item.Email</td>
+
+                    <td>
+
+                        <a asp-action="Details"
+                           asp-route-id="@item.IdComercio"
+                           class="btn btn-sm btn-info">
+                            Detalles
+                        </a>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@item.IdComercio"
+                           class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@item.IdComercio"
+                           class="btn btn-sm btn-danger">
+                            Eliminar
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+
+</table>

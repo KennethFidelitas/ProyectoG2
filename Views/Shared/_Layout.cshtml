@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MiProyectoMVC</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MiProyectoMVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Views/Shared/_Layout.cshtml.css" />
+
+    @* NUEVO: CSS de accesibilidad *@
+    <link rel="stylesheet" href="~/css/accesibilidad.css" asp-append-version="true" />
+</head>
+
+<body>
+
+    @* NUEVO: role="banner" identifica el encabezado para lectores de pantalla *@
+    <header role="banner">
+        @* NUEVO: role="navigation" y aria-label describen el menú *@
+        <nav class="navbar navbar-expand-lg navbar-light navbar-custom"
+             role="navigation"
+             aria-label="Navegación principal">
+            <div class="container">
+
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    SinpeEmpresarial
+                </a>
+
+                @* NUEVO: aria-expanded y aria-label en el botón del menú móvil *@
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#menuPrincipal"
+                        aria-expanded="false"
+                        aria-controls="menuPrincipal"
+                        aria-label="Abrir o cerrar menú de navegación">
+                    <span class="navbar-toggler-icon" aria-hidden="true"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                Inicio
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Sinpes" asp-action="Create">
+                                Registrar SINPE
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Cajas" asp-action="Index">
+                                Cajas
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Comercios" asp-action="Index">
+                                Comercios
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">
+                                Privacy
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Bitacora" asp-action="Index">
+                                Bitácora
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container">
+        @* NUEVO: id="contenido-principal" para que funcione el skip link del JS *@
+        <main role="main" id="contenido-principal" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    @* NUEVO: role="contentinfo" identifica el pie de página *@
+    <footer role="contentinfo" class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - MiProyectoMVC -
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+    @* NUEVO: script de accesibilidad, carga después de jQuery *@
+    <script src="~/js/accesibilidad.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
