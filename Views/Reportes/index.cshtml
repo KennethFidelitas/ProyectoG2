@@ -1,0 +1,38 @@
+@model List<MiProyectoMVC.Models.ReporteMensual>
+
+<h2>Reportes Mensuales</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<form asp-action="Generar" method="post">
+    <button type="submit" class="btn btn-primary mb-3">Generar reportes</button>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Comercio</th>
+            <th>Cantidad de Cajas</th>
+            <th>Monto Recaudado</th>
+            <th>Cantidad de SINPES</th>
+            <th>Monto de Comisión</th>
+            <th>Fecha de Reporte</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.NombreComercio</td>
+                <td>@r.CantidadDeCajas</td>
+                <td>₡@r.MontoTotalRecaudado.ToString("N2")</td>
+                <td>@r.CantidadDeSINPES</td>
+                <td>₡@r.MontoTotalDeComision.ToString("N2")</td>
+                <td>@r.FechaReporte.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

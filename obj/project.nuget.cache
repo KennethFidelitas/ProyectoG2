@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0AKGD7h611Q=",
+  "dgSpecHash": "lagmRYoEgOc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\cerda\\Downloads\\PracticaProgramada3_Grupo2\\Nueva carpeta\\ProyectoG2\\MiProyectoMVC\\MiProyectoMVC.csproj",
+  "projectFilePath": "C:\\Users\\cerda\\Downloads\\PracticaProgramada3_Grupo2\\Nueva carpeta\\kk7\\ProyectoG2\\MiProyectoMVC\\MiProyectoMVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cerda\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\cerda\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",

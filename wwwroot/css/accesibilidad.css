@@ -1,176 +1,75 @@
-﻿/* --- Variables de color (contraste mínimo 4.5:1) --- */
+﻿
 :root {
-    --color-principal: #0056b3;
-    --color-texto: #1a1a1a;
-    --color-fondo: #ffffff;
-    --color-error: #b00020;
-    --color-exito: #155724;
-    --color-foco: #ffbf47;
+    --color-principal: #0056b3;  /* Azul similar al diseño */
+    --color-texto: #ffffff;  /* Blanco para texto */
+    --color-fondo-menu: #ffffff;  /* Fondo blanco para el menú */
+    --color-fondo-boton: #007bff; /* Azul para botones */
+    --color-boton-hover: #0056b3;  /* Azul oscuro al pasar el mouse */
+    --color-fondo-hover: #f1f1f1;  /* Fondo claro al pasar el mouse */
+    --color-boton-texto: #ffffff; /* Texto blanco en botones */
 }
 
-/* --- Modo alto contraste --- */
-body.alto-contraste {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-}
 
-    body.alto-contraste a,
-    body.alto-contraste p,
-    body.alto-contraste h1,
-    body.alto-contraste h2,
-    body.alto-contraste h3,
-    body.alto-contraste label,
-    body.alto-contraste td,
-    body.alto-contraste th {
-        color: #ffffff !important;
-    }
-
-    body.alto-contraste .navbar,
-    body.alto-contraste .card-box,
-    body.alto-contraste .modal-content,
-    body.alto-contraste .table {
-        background-color: #111111 !important;
-        border-color: #ffffff !important;
-    }
-
-    body.alto-contraste .btn {
-        border: 2px solid #ffffff !important;
-    }
-
-/* --- Fuentes escalables (usa rem en lugar de px) --- */
-html {
-    font-size: 100%; /* respeta la configuración del navegador */
-}
-
-body {
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-h1 {
-    font-size: 2rem;
-}
-
-h2 {
-    font-size: 1.5rem;
-}
-
-h3 {
-    font-size: 1.25rem;
-}
-
-p, td, th, label, li {
-    font-size: 1rem;
-}
-
-small {
-    font-size: 0.875rem;
-}
-
-/* --- Foco visible para navegación por teclado --- */
-a:focus,
-button:focus,
-input:focus,
-select:focus,
-textarea:focus {
-    outline: 3px solid var(--color-foco);
-    outline-offset: 3px;
-}
-
-/* --- Barra de herramientas de accesibilidad --- */
-#barra-accesibilidad {
-    background-color: #1a1a1a;
-    padding: 0.4rem 1rem;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-    #barra-accesibilidad span {
-        color: #ffffff;
-        font-size: 0.85rem;
-        font-weight: bold;
-    }
-
-    #barra-accesibilidad button {
-        background: transparent;
-        border: 1px solid #aaaaaa;
-        color: #ffffff;
-        padding: 0.25rem 0.6rem;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.85rem;
-    }
-
-        #barra-accesibilidad button:hover {
-            background: #ffffff;
-            color: #000000;
-        }
-
-/* --- Skip link (saltar al contenido) --- */
-.skip-link {
-    position: absolute;
-    top: -100px;
-    left: 0.5rem;
-    background: var(--color-principal);
-    color: #ffffff;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-weight: bold;
-    text-decoration: none;
-    z-index: 9999;
-}
-
-    .skip-link:focus {
-        top: 0.5rem;
-    }
-
-/* --- Mensajes de error en formularios --- */
-.mensaje-error {
-    color: var(--color-error);
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: block;
-}
-
-/* --- Alertas accesibles --- */
-.alerta-exito {
-    background: #d4edda;
-    color: #155724;
-    border-left: 4px solid #28a745;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-}
-
-.alerta-error {
-    background: #f8d7da;
-    color: #721c24;
-    border-left: 4px solid #dc3545;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-}
-
-/* --- Botón volver arriba --- */
-#btn-arriba {
+.accesibilidad-menu {
     position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: var(--color-principal);
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: none;
-    z-index: 999;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--color-principal);
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 18px;
+    color: var(--color-texto);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Tablas: scroll horizontal en móvil --- */
-.tabla-responsive-acc {
-    overflow-x: auto;
+
+.accesibilidad-menu #menu-toggle {
+    color: var(--color-boton-texto);
+    background-color: var(--color-principal);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+}
+
+.accesibilidad-menu #menu-toggle:hover {
+    background-color: var(--color-boton-hover);
+}
+
+
+.accesibilidad-content {
+    display: none;
+    margin-top: 10px;
+    background-color: var(--color-fondo-menu);
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.accesibilidad-content button {
+    background: transparent;
+    color: var(--color-principal);
+    border: 1px solid var(--color-principal);
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.accesibilidad-content button:hover {
+    background: var(--color-principal);
+    color: var(--color-boton-texto);
+}
+
+
+.accesibilidad-menu.open .accesibilidad-content {
+    display: block;
 }

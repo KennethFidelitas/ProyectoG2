@@ -28,7 +28,8 @@ builder.Services.AddScoped<ISinpeRepository, SinpeRepository>();
 builder.Services.AddScoped<ICajaRepository, CajaRepository>();
 builder.Services.AddScoped<IComercioRepository, ComercioRepository>();
 builder.Services.AddScoped<IBitacoraRepository, BitacoraRepository>();
-
+builder.Services.AddScoped<IReporteRepository, ReporteRepository>();
+builder.Services.AddScoped<ReporteBusiness>();
 
 builder.Services.AddScoped<SinpeBusiness>();
 builder.Services.AddScoped<CajaBusiness>();
