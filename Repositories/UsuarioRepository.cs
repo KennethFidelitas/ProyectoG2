@@ -47,7 +47,8 @@ namespace MiProyectoMVC.Repositories
                 primerApellido = usuario.PrimerApellido,
                 segundoApellido = usuario.SegundoApellido,
                 identificacion = usuario.Identificacion,
-                correoElectronico = usuario.CorreoElectronico
+                correoElectronico = usuario.CorreoElectronico,
+                estado = usuario.Estado
             };
 
             var response = _http.PostAsJsonAsync("usuarios", json)
@@ -62,7 +63,22 @@ namespace MiProyectoMVC.Repositories
 
         public void Editar(Usuario usuario)
         {
-            var response = _http.PutAsJsonAsync($"usuarios/{usuario.IdUsuario}", usuario)
+            var json = new
+            {
+                idUsuario = usuario.IdUsuario,
+                comercio = new
+                {
+                    idComercio = usuario.IdComercio
+                },
+                nombres = usuario.Nombres,
+                primerApellido = usuario.PrimerApellido,
+                segundoApellido = usuario.SegundoApellido,
+                identificacion = usuario.Identificacion,
+                correoElectronico = usuario.CorreoElectronico,
+                estado = usuario.Estado
+            };
+
+            var response = _http.PutAsJsonAsync($"usuarios/{usuario.IdUsuario}", json)
                                 .GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)
@@ -74,7 +90,14 @@ namespace MiProyectoMVC.Repositories
 
         public void Eliminar(int id)
         {
-            _ = _http.DeleteAsync($"usuarios/{id}");
+            var response = _http.DeleteAsync($"usuarios/{id}")
+                                .GetAwaiter().GetResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = response.Content.ReadAsStringAsync().Result;
+                throw new Exception("Error API: " + error);
+            }
         }
     }
 }

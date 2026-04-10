@@ -11,93 +11,105 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MiProyectoMVC
 build_property.RootNamespace = MiProyectoMVC
-build_property.ProjectDir = C:\Users\cerda\Downloads\PracticaProgramada3_Grupo2\Nueva carpeta\kk7\ProyectoG2\MiProyectoMVC\
+build_property.ProjectDir = C:\Users\cerda\Downloads\gitkk\ProyectoG2\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\cerda\Downloads\PracticaProgramada3_Grupo2\Nueva carpeta\kk7\ProyectoG2\MiProyectoMVC
+build_property.MSBuildProjectDirectory = C:\Users\cerda\Downloads\gitkk\ProyectoG2
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Bitacora/Index.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Bitacora/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQml0YWNvcmFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Cajas/Cerrar.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Cajas/Cerrar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYXNcQ2VycmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Cajas/Create.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Cajas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Cajas/Delete.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Cajas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Cajas/Edit.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Cajas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Cajas/Index.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Cajas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Comercios/Create.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Comercios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tZXJjaW9zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Comercios/Delete.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Comercios/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tZXJjaW9zXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Comercios/Details.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Comercios/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tZXJjaW9zXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Comercios/Edit.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Comercios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tZXJjaW9zXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Comercios/Index.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Comercios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tZXJjaW9zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Home/Index.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Home/Privacy.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Reportes/index.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Reportes/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcaW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Shared/Error.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Sinpes/Create.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Sinpes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lucGVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/_ViewImports.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Usuarios/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Usuarios/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Usuarios/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/_ViewStart.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cerda/Downloads/PracticaProgramada3_Grupo2/Nueva carpeta/kk7/ProyectoG2/MiProyectoMVC/Views/Shared/_Layout.cshtml]
+[C:/Users/cerda/Downloads/gitkk/ProyectoG2/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-jeg3itm05f

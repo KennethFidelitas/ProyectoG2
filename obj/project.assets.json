@@ -527,11 +527,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cerda\\Downloads\\PracticaProgramada3_Grupo2\\Nueva carpeta\\kk7\\ProyectoG2\\MiProyectoMVC\\MiProyectoMVC.csproj",
+      "projectUniqueName": "C:\\Users\\cerda\\Downloads\\gitkk\\ProyectoG2\\MiProyectoMVC.csproj",
       "projectName": "MiProyectoMVC",
-      "projectPath": "C:\\Users\\cerda\\Downloads\\PracticaProgramada3_Grupo2\\Nueva carpeta\\kk7\\ProyectoG2\\MiProyectoMVC\\MiProyectoMVC.csproj",
+      "projectPath": "C:\\Users\\cerda\\Downloads\\gitkk\\ProyectoG2\\MiProyectoMVC.csproj",
       "packagesPath": "C:\\Users\\cerda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cerda\\Downloads\\PracticaProgramada3_Grupo2\\Nueva carpeta\\kk7\\ProyectoG2\\MiProyectoMVC\\obj\\",
+      "outputPath": "C:\\Users\\cerda\\Downloads\\gitkk\\ProyectoG2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

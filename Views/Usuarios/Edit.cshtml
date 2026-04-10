@@ -1,10 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-
-}
-@model Usuario
+﻿@model MiProyectoMVC.Models.Usuario
 
 <h2>Editar Usuario</h2>
 
@@ -16,6 +10,7 @@
 <form asp-action="Edit" method="post">
 
     <input type="hidden" asp-for="IdUsuario" />
+    <input type="hidden" asp-for="IdComercio" />
 
     <div class="form-group">
         <label>Nombres</label>

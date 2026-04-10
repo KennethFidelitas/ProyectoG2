@@ -13,20 +13,20 @@ namespace MiProyectoMVC.Controllers
             _business = business;
         }
 
-        // LISTAR
+        
         public IActionResult Index()
         {
             var lista = _business.Listar();
             return View(lista);
         }
 
-        // CREAR (GET)
+       
         public IActionResult Create()
         {
             return View();
         }
 
-        // CREAR (POST)
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Usuario model)
@@ -50,7 +50,7 @@ namespace MiProyectoMVC.Controllers
             }
         }
 
-        // EDITAR (GET)
+       
         public IActionResult Edit(int id)
         {
             var usuario = _business.Obtener(id);
@@ -63,28 +63,34 @@ namespace MiProyectoMVC.Controllers
             return View(usuario);
         }
 
-        // EDITAR (POST)
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Usuario model)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Error = "Datos inválidos";
-                return View(model);
-            }
+[ValidateAntiForgeryToken]
+public IActionResult Edit(Usuario model)
+{
+    if (!ModelState.IsValid)
+    {
+        var errores = ModelState.Values
+            .SelectMany(v => v.Errors)
+            .Select(e => e.ErrorMessage)
+            .ToList();
 
-            try
-            {
-                _business.Editar(model);
-                TempData["Success"] = "Usuario actualizado correctamente";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View(model);
-            }
-        }
+        ViewBag.Error = string.Join(" | ", errores);
+
+        return View(model);
+    }
+
+    try
+    {
+        _business.Editar(model);
+        TempData["Success"] = "Usuario actualizado correctamente";
+        return RedirectToAction("Index");
+    }
+    catch (Exception ex)
+    {
+        ViewBag.Error = ex.Message;
+        return View(model);
+    }
+}
     }
 }
