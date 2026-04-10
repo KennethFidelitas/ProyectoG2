@@ -18,12 +18,26 @@ public class BitacoraRepository : IBitacoraRepository
 
     public async Task RegistrarEvento(BitacoraEvento evento)
     {
-        await _http.PostAsJsonAsync("bitacora", evento);
+        try
+        {
+            await _http.PostAsJsonAsync("bitacora", evento);
+        }
+        catch
+        {
+            
+        }
     }
 
     public async Task<List<BitacoraEvento>> ObtenerEventos()
     {
-        var data = await _http.GetFromJsonAsync<List<BitacoraEvento>>("bitacora");
-        return data ?? new List<BitacoraEvento>();
+        try
+        {
+            var data = await _http.GetFromJsonAsync<List<BitacoraEvento>>("bitacora");
+            return data ?? new List<BitacoraEvento>();
+        }
+        catch
+        {
+            return new List<BitacoraEvento>();
+        }
     }
 }

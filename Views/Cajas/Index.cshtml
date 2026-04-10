@@ -196,8 +196,15 @@ function sincronizarSinpe(idSinpe, idCaja) {
     .then(result => {
         if (result.success) {
             alert(result.mensaje);
-            // Recargar los sinpes de la caja en el modal
-            verSinpes(idCaja);
+
+            // Actualizar la fila directamente en el DOM sin volver a consultar la API
+            const fila = document.getElementById(`fila-sinpe-${idSinpe}`);
+            if (fila) {
+                const celdaEstado = fila.cells[6];
+                const celdaAccion = fila.cells[7];
+                celdaEstado.innerHTML = `<span class="badge bg-success">Sincronizado</span>`;
+                celdaAccion.innerHTML = `-`;
+            }
         } else {
             alert("Error: " + result.mensaje);
         }
