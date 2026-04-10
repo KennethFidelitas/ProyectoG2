@@ -29,12 +29,13 @@ builder.Services.AddScoped<ICajaRepository, CajaRepository>();
 builder.Services.AddScoped<IComercioRepository, ComercioRepository>();
 builder.Services.AddScoped<IBitacoraRepository, BitacoraRepository>();
 builder.Services.AddScoped<IReporteRepository, ReporteRepository>();
-builder.Services.AddScoped<ReporteBusiness>();
+builder.Services.AddHttpClient<IUsuarioRepository, UsuarioRepository>();
 
+builder.Services.AddScoped<ReporteBusiness>();
 builder.Services.AddScoped<SinpeBusiness>();
 builder.Services.AddScoped<CajaBusiness>();
 builder.Services.AddScoped<ComercioBusiness>();
-
+builder.Services.AddScoped<UsuarioBusiness>();
 var app = builder.Build();
 
 

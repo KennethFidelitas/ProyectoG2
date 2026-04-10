@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Usuario>
+
+<h2>Lista de Usuarios</h2>
+
+<a asp-action="Create" class="btn btn-primary">Nuevo Usuario</a>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Nombres</th>
+            <th>Primer Apellido</th>
+            <th>Segundo Apellido</th>
+            <th>Identificación</th>
+            <th>Correo</th>
+            <th>Fecha Registro</th>
+            <th>Fecha Modificación</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Nombres</td>
+                <td>@u.PrimerApellido</td>
+                <td>@u.SegundoApellido</td>
+                <td>@u.Identificacion</td>
+                <td>@u.CorreoElectronico</td>
+                <td>@u.FechaDeRegistro</td>
+                <td>@u.FechaDeModificacion</td>
+                <td>
+                    @(u.Estado ? "Activo" : "Inactivo")
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@u.IdUsuario" class="btn btn-warning btn-sm">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

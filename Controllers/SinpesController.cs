@@ -26,7 +26,7 @@ namespace MiProyectoMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _business.Registrar(model); // ✅ CORREGIDO
+                _business.Registrar(model);
 
                 TempData["Success"] = "Pago SINPE registrado correctamente";
                 return RedirectToAction("Create");
