@@ -12,11 +12,13 @@ namespace MiProyectoMVC.Controllers
     {
         private readonly CajaBusiness _business;
         private readonly ISinpeRepository _sinpeRepository;
+        private readonly SinpeBusiness _sinpeBusiness;
 
-        public CajasController(CajaBusiness business, ISinpeRepository sinpeRepository)
+        public CajasController(CajaBusiness business, ISinpeRepository sinpeRepository, SinpeBusiness sinpeBusiness)
         {
             _business = business;
             _sinpeRepository = sinpeRepository;
+            _sinpeBusiness = sinpeBusiness;
         }
 
        
@@ -182,6 +184,20 @@ public IActionResult ObtenerSinpes(int idCaja)
     {
         PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
     });
+}
+
+[HttpPost]
+public IActionResult SincronizarSinpe(int idSinpe)
+{
+    try
+    {
+        _sinpeBusiness.SincronizarSinpe(idSinpe);
+        return Json(new { success = true, mensaje = "SINPE sincronizado correctamente." });
+    }
+    catch (Exception ex)
+    {
+        return Json(new { success = false, mensaje = ex.Message });
+    }
 }
     }
 }

@@ -4,17 +4,17 @@ using MiProyectoMVC.Models;
 using MiProyectoMVC.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 public class UsuarioBusiness
 {
     private readonly IUsuarioRepository _repo;
+    private readonly IBitacoraRepository _bitacoraRepository;
 
-    public UsuarioBusiness(IUsuarioRepository repo)
+    public UsuarioBusiness(IUsuarioRepository repo, IBitacoraRepository bitacoraRepository)
     {
         _repo = repo;
+        _bitacoraRepository = bitacoraRepository;
     }
 
     public List<Usuario> Listar()
@@ -29,19 +29,57 @@ public class UsuarioBusiness
 
     public void Crear(Usuario usuario)
     {
-        if (_repo.ObtenerPorIdentificacion(usuario.Identificacion) != null)
-            throw new Exception("Identificación repetida");
+        try
+        {
+            if (_repo.ObtenerPorIdentificacion(usuario.Identificacion) != null)
+                throw new Exception("Ya existe un usuario con esa identificación.");
 
-        _repo.Crear(usuario);
+            _repo.Crear(usuario);
+
+            RegistrarBitacora("Usuarios", "Registrar",
+                $"Usuario '{usuario.Nombres}' registrado correctamente.",
+                null, null, JsonSerializer.Serialize(usuario));
+        }
+        catch (Exception ex)
+        {
+            RegistrarBitacora("Usuarios", "Error", ex.Message, ex.StackTrace, null, null);
+            throw;
+        }
     }
 
     public void Editar(Usuario usuario)
     {
-        var u = _repo.ObtenerPorId(usuario.IdUsuario);
+        try
+        {
+            var anterior = _repo.ObtenerPorId(usuario.IdUsuario)
+                ?? throw new Exception("Usuario no existe.");
 
-        if (u == null)
-            throw new Exception("Usuario no existe");
+            _repo.Editar(usuario);
 
-        _repo.Editar(usuario);
+            RegistrarBitacora("Usuarios", "Editar",
+                $"Usuario ID {usuario.IdUsuario} editado correctamente.",
+                null, JsonSerializer.Serialize(anterior), JsonSerializer.Serialize(usuario));
+        }
+        catch (Exception ex)
+        {
+            RegistrarBitacora("Usuarios", "Error", ex.Message, ex.StackTrace, null, null);
+            throw;
+        }
+    }
+
+    private void RegistrarBitacora(
+        string tabla, string tipo, string descripcion,
+        string? stackTrace, string? datosAnteriores, string? datosPosteriores)
+    {
+        _bitacoraRepository.RegistrarEvento(new BitacoraEvento
+        {
+            TablaDeEvento = tabla,
+            TipoDeEvento = tipo,
+            FechaDeEvento = DateTime.Now,
+            DescripcionDeEvento = descripcion,
+            StackTrace = stackTrace ?? "",
+            DatosAnteriores = datosAnteriores,
+            DatosPosteriores = datosPosteriores
+        });
     }
 }

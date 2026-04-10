@@ -83,6 +83,8 @@
 
 </table>
 
+@Html.AntiForgeryToken()
+
 <!-- MODAL -->
 <div class="modal fade" id="modalSinpes" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -110,6 +112,8 @@
                             <th>Monto</th>
                             <th>Fecha</th>
                             <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody id="tablaSinpes"></tbody>
@@ -130,35 +134,38 @@ function verSinpes(idCaja) {
         return res.json();
     })
     .then(data => {
-
-        console.log("SINPES:", data);
-
         let tabla = document.getElementById("tablaSinpes");
         let totalLabel = document.getElementById("totalSinpes");
 
         tabla.innerHTML = "";
 
         if (!data || data.length === 0) {
-            tabla.innerHTML = `<tr><td colspan="6">No hay registros</td></tr>`;
+            tabla.innerHTML = `<tr><td colspan="8" class="text-center">No hay registros</td></tr>`;
             totalLabel.innerText = "₡0.00";
         } else {
-
-            // 🔥 ORDENAR POR FECHA DESC
             data.sort((a, b) => new Date(b.fechaDeRegistro) - new Date(a.fechaDeRegistro));
-
             let total = 0;
 
             data.forEach(s => {
                 total += s.monto;
+                const estadoLabel = s.estado
+                    ? `<span class="badge bg-success">Sincronizado</span>`
+                    : `<span class="badge bg-warning text-dark">Pendiente</span>`;
+
+                const accionBtn = !s.estado
+                    ? `<button class="btn btn-sm btn-primary" onclick="sincronizarSinpe(${s.idSinpe}, ${idCaja})">Sincronizar</button>`
+                    : `-`;
 
                 tabla.innerHTML += `
-                    <tr>
+                    <tr id="fila-sinpe-${s.idSinpe}">
                         <td>${s.idSinpe}</td>
                         <td>${s.nombreOrigen}</td>
                         <td>${s.nombreDestinatario}</td>
                         <td>₡${s.monto.toFixed(2)}</td>
                         <td>${new Date(s.fechaDeRegistro).toLocaleString()}</td>
                         <td>${s.descripcion ?? ""}</td>
+                        <td>${estadoLabel}</td>
+                        <td>${accionBtn}</td>
                     </tr>
                 `;
             });
@@ -175,4 +182,29 @@ function verSinpes(idCaja) {
     });
 }
 
+function sincronizarSinpe(idSinpe, idCaja) {
+    if (!confirm("¿Desea sincronizar este SINPE?")) return;
+
+    const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value ?? "";
+
+    fetch('/Cajas/SincronizarSinpe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idSinpe=${idSinpe}&__RequestVerificationToken=${encodeURIComponent(token)}`
+    })
+    .then(res => res.json())
+    .then(result => {
+        if (result.success) {
+            alert(result.mensaje);
+            // Recargar los sinpes de la caja en el modal
+            verSinpes(idCaja);
+        } else {
+            alert("Error: " + result.mensaje);
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error al sincronizar.");
+    });
+}
 </script>

@@ -17,5 +17,7 @@ namespace MiProyectoMVC.Repositories
         Caja ObtenerCajaAbierta(int comercioId);
 
         void AgregarMontoACaja(int idCaja, decimal monto);
+
+        void SincronizarSinpe(int id);
     }
 }

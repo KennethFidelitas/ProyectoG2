@@ -84,5 +84,15 @@ namespace MiProyectoMVC.Repositories
                 _ = _http.PutAsJsonAsync($"cajas/{caja.IdCaja}", caja);
             }
         }
+
+        public void SincronizarSinpe(int id)
+        {
+            var sinpe = ObtenerPorId(id);
+            if (sinpe == null) return;
+
+            sinpe.Estado = true;
+            var response = _http.PutAsJsonAsync($"sinpes/{id}", sinpe).GetAwaiter().GetResult();
+            response.EnsureSuccessStatusCode();
+        }
     }
 }
