@@ -1,0 +1,45 @@
+﻿@model MiProyectoMVC.Models.ConfiguracionComercio
+
+<h2>Nueva Configuración</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<form asp-action="Crear" method="post">
+
+    <div class="form-group">
+        <label>Comercio</label>
+        <select asp-for="IdComercio" class="form-control" required>
+            <option value="">Seleccione un comercio</option>
+            @foreach (var comercio in ViewBag.Comercios)
+            {
+                <option value="@comercio.IdComercio">@comercio.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Tipo Configuración</label>
+        <select asp-for="TipoConfiguracion" class="form-control" required>
+            <option value="">Seleccione</option>
+            <option value="1">Plataforma</option>
+            <option value="2">Externa</option>
+            <option value="3">Ambas</option>
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Comisión</label>
+        <input asp-for="Comision" type="number" class="form-control" required />
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+</form>

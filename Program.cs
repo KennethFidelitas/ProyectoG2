@@ -30,12 +30,15 @@ builder.Services.AddScoped<IComercioRepository, ComercioRepository>();
 builder.Services.AddScoped<IBitacoraRepository, BitacoraRepository>();
 builder.Services.AddScoped<IReporteRepository, ReporteRepository>();
 builder.Services.AddHttpClient<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddHttpClient<IConfiguracionComercioRepository, ConfiguracionComercioRepository>();
+
 
 builder.Services.AddScoped<ReporteBusiness>();
 builder.Services.AddScoped<SinpeBusiness>();
 builder.Services.AddScoped<CajaBusiness>();
 builder.Services.AddScoped<ComercioBusiness>();
 builder.Services.AddScoped<UsuarioBusiness>();
+builder.Services.AddScoped<ConfiguracionComercioBusiness>();
 var app = builder.Build();
 
 

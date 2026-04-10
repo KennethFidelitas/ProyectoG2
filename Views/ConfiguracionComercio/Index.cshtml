@@ -1,0 +1,35 @@
+﻿@model List<MiProyectoMVC.Models.ConfiguracionComercio>
+
+<h2>Configuración de Comercios</h2>
+
+<a asp-action="Crear" class="btn btn-primary">Nueva Configuración</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Nombre Comercio</th>
+            <th>Tipo Configuración</th>
+            <th>Comisión</th>
+            <th>Fecha Registro</th>
+            <th>Fecha Modificación</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NombreComercio</td>
+                <td>@item.TipoConfiguracionTexto</td>
+                <td>@item.Comision</td>
+                <td>@item.FechaDeRegistro</td>
+                <td>@item.FechaDeModificacion</td>
+                <td>@(item.Estado ? "Activo" : "Inactivo")</td>
+                <td>
+                    <a asp-action="Editar" asp-route-idComercio="@item.IdComercio" class="btn btn-warning">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+﻿@model MiProyectoMVC.Models.ConfiguracionComercio
+
+<h2>Editar Configuración</h2>
+
+<form asp-action="Editar" method="post">
+
+    <input type="hidden" asp-for="IdConfiguracion" />
+    <input type="hidden" asp-for="IdComercio" />
+
+    <div class="form-group">
+        <label>Tipo Configuración</label>
+        <select asp-for="TipoConfiguracion" class="form-control">
+            <option value="1">Plataforma</option>
+            <option value="2">Externa</option>
+            <option value="3">Ambas</option>
+        </select>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Comisión</label>
+        <input asp-for="Comision" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Estado</label>
+        <select asp-for="Estado" class="form-control">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-warning">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+</form>
