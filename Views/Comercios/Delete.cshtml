@@ -4,36 +4,42 @@
     ViewData["Title"] = "Eliminar Comercio";
 }
 
-<h2 id="tituloEliminar">Eliminar Comercio</h2>
-<hr />
+<div style="max-width:480px;">
+    <div class="page-header">
+        <a asp-action="Index" class="dn-btn dn-btn-secondary dn-btn-sm" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            Volver a comercios
+        </a>
+        <h1 class="page-title" id="tituloEliminar">Eliminar Comercio</h1>
+    </div>
 
-<div class="alert alert-warning">
-    ¿Seguro que desea eliminar el comercio <strong>@Model.Nombre</strong>?
+    <div class="dn-alert dn-alert-warning">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+        ¿Seguro que desea eliminar el comercio <strong>@Model.Nombre</strong>?
+    </div>
+
+    <div class="dn-card" style="margin-bottom:1.5rem;">
+        <dl style="display:grid;grid-template-columns:auto 1fr;gap:0.875rem 1.5rem;align-items:start;">
+            <dt style="font-size:0.8125rem;font-weight:600;color:var(--text-secondary);">Nombre</dt>
+            <dd style="font-weight:500;">@Model.Nombre</dd>
+
+            <dt style="font-size:0.8125rem;font-weight:600;color:var(--text-secondary);">Dirección</dt>
+            <dd>@Model.Direccion</dd>
+
+            <dt style="font-size:0.8125rem;font-weight:600;color:var(--text-secondary);">Teléfono</dt>
+            <dd>@Model.Telefono</dd>
+        </dl>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="IdComercio" />
+        <div style="display:flex;gap:0.75rem;">
+            <button type="submit" class="dn-btn dn-btn-danger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" /><path d="M10 11v6M14 11v6" /></svg>
+                Sí, eliminar
+            </button>
+            <a asp-action="Index" class="dn-btn dn-btn-secondary">Cancelar</a>
+        </div>
+    </form>
 </div>
-
-<dl class="row">
-    <dt class="col-sm-3">Nombre</dt>
-    <dd class="col-sm-9">@Model.Nombre</dd>
-
-    <dt class="col-sm-3">Dirección</dt>
-    <dd class="col-sm-9">@Model.Direccion</dd>
-
-    <dt class="col-sm-3">Teléfono</dt>
-    <dd class="col-sm-9">@Model.Telefono</dd>
-</dl>
-
-<form asp-action="Delete" method="post">
-
-    @Html.AntiForgeryToken()
-
-    <input type="hidden" asp-for="IdComercio" />
-
-    <button type="submit" class="btn btn-danger">
-        Eliminar
-    </button>
-
-    <a asp-action="Index" class="btn btn-secondary">
-        Cancelar
-    </a>
-
-</form>

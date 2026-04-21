@@ -4,48 +4,51 @@
     ViewData["Title"] = "Editar Caja";
 }
 
-<h2 id="tituloEdit">Editar Caja #@Model.IdCaja</h2>
-<hr />
-
-<form asp-action="Edit" method="post">
-
-    @Html.AntiForgeryToken()
-
-    <input type="hidden" asp-for="IdCaja" />
-
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div class="alert alert-danger">
-            <ul>
-                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    <li>@error.ErrorMessage</li>
-                }
-            </ul>
-        </div>
-    }
-
-    <div class="mb-3">
-        <label asp-for="ComercioId" class="form-label"></label>
-
-        <select asp-for="ComercioId"
-                asp-items="ViewBag.Comercios"
-                class="form-select"
-                required>
-        </select>
-
-        <span asp-validation-for="ComercioId" class="text-danger"></span>
+<div style="max-width:520px;">
+    <div class="page-header">
+        <a asp-action="Index" class="dn-btn dn-btn-secondary dn-btn-sm" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            Volver a cajas
+        </a>
+        <h1 class="page-title" id="tituloEdit">Editar Caja #@Model.IdCaja</h1>
+        <p class="page-subtitle">Modifica los datos de la caja.</p>
     </div>
 
-    <button type="submit" class="btn btn-warning">
-        Guardar Cambios
-    </button>
+    <div class="dn-card">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="IdCaja" />
 
-    <a asp-action="Index" class="btn btn-secondary">
-        Cancelar
-    </a>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="dn-alert dn-alert-danger" role="alert">
+                    <ul style="margin:0;padding-left:1.25rem;">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
 
-</form>
+            <div class="dn-form-group">
+                <label class="dn-label" asp-for="ComercioId">Comercio</label>
+                <select asp-for="ComercioId" asp-items="ViewBag.Comercios"
+                        class="dn-select" required>
+                </select>
+                <span asp-validation-for="ComercioId" class="dn-validation"></span>
+            </div>
+
+            <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
+                <button type="submit" class="dn-btn dn-btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /></svg>
+                    Guardar cambios
+                </button>
+                <a asp-action="Index" class="dn-btn dn-btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

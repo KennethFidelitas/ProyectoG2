@@ -4,48 +4,66 @@
     ViewData["Title"] = "Cerrar Caja";
 }
 
-<h2 id="tituloCerrar">Cerrar Caja #@Model.IdCaja</h2>
-<hr />
+<div style="max-width:480px;">
+    <div class="page-header">
+        <a asp-action="Index" class="dn-btn dn-btn-secondary dn-btn-sm" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            Volver a cajas
+        </a>
+        <h1 class="page-title" id="tituloCerrar">Cerrar Caja #@Model.IdCaja</h1>
+        <p class="page-subtitle">Confirma el monto final para cerrar la caja.</p>
+    </div>
 
-<div class="card mb-3" style="max-width: 400px;" role="region" aria-labelledby="tituloCerrar">
-    <div class="card-body">
-        <p><strong>Comercio:</strong> @Model.NombreComercio</p>
-        <p><strong>Apertura:</strong> @Model.FechaApertura.ToString("dd/MM/yyyy HH:mm")</p>
+    <!-- Info Card -->
+    <div class="dn-card" style="margin-bottom:1rem;" role="region" aria-labelledby="tituloCerrar">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div>
+                <div style="font-size:0.75rem;color:var(--text-secondary);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Comercio</div>
+                <div style="font-weight:600;color:var(--text-primary);">@Model.NombreComercio</div>
+            </div>
+            <div>
+                <div style="font-size:0.75rem;color:var(--text-secondary);font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;">Apertura</div>
+                <div style="font-weight:500;color:var(--text-primary);">@Model.FechaApertura.ToString("dd/MM/yyyy HH:mm")</div>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="dn-alert dn-alert-danger" role="alert" aria-live="assertive">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="dn-card">
+        <form asp-action="CerrarConfirmado" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="idCaja" value="@Model.IdCaja" />
+
+            <div class="dn-form-group">
+                <label class="dn-label" for="montoFinal">Monto final en caja</label>
+                <div style="position:relative;">
+                    <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-weight:600;color:var(--text-secondary);">₡</span>
+                    <input type="number"
+                           id="montoFinal"
+                           name="montoFinal"
+                           step="0.01"
+                           min="0"
+                           class="dn-input"
+                           style="padding-left:2rem;"
+                           placeholder="0.00"
+                           required />
+                </div>
+            </div>
+
+            <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
+                <button type="submit" class="dn-btn dn-btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                    Confirmar cierre
+                </button>
+                <a asp-action="Index" class="dn-btn dn-btn-secondary">Cancelar</a>
+            </div>
+        </form>
     </div>
 </div>
-
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger" role="alert" aria-live="assertive">
-        @TempData["Error"]
-    </div>
-}
-
-<form asp-action="CerrarConfirmado" method="post" role="form" aria-labelledby="tituloCerrar">
-
-    @Html.AntiForgeryToken()
-
-    <input type="hidden" name="idCaja" value="@Model.IdCaja" />
-
-    <div class="mb-3">
-        <label for="montoFinal" class="form-label">Monto Final en Caja</label>
-
-        <input type="number"
-               id="montoFinal"
-               name="montoFinal"
-               step="0.01"
-               min="0"
-               class="form-control"
-               placeholder="Ingrese el monto final"
-               required />
-    </div>
-
-    <button type="submit" class="btn btn-info">
-        Confirmar Cierre
-    </button>
-
-    <a asp-action="Index" class="btn btn-secondary">
-        Cancelar
-    </a>
-
-</form>

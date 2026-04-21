@@ -6,47 +6,90 @@
 
 @model List<Usuario>
 
-<h2>Lista de Usuarios</h2>
+@{
+    ViewData["Title"] = "Usuarios";
+}
 
-<a asp-action="Create" class="btn btn-primary">Nuevo Usuario</a>
+<div class="page-header">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+        <div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.25rem;">
+                <div style="width:36px;height:36px;background:rgba(56,189,248,0.1);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--accent);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>
+                </div>
+                <h1 class="page-title" style="margin:0;">Usuarios</h1>
+            </div>
+            <p class="page-subtitle">Gestiona los usuarios del sistema.</p>
+        </div>
+        <a asp-action="Create" class="dn-btn dn-btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+            Nuevo usuario
+        </a>
+    </div>
+</div>
 
 @if (ViewBag.Error != null)
 {
-    <div class="alert alert-danger">@ViewBag.Error</div>
+    <div class="dn-alert dn-alert-danger" role="alert">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
+        @ViewBag.Error
+    </div>
 }
 
-<table class="table table-bordered mt-3">
-    <thead>
-        <tr>
-            <th>Nombres</th>
-            <th>Primer Apellido</th>
-            <th>Segundo Apellido</th>
-            <th>Identificación</th>
-            <th>Correo</th>
-            <th>Fecha Registro</th>
-            <th>Fecha Modificación</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var u in Model)
-        {
-            <tr>
-                <td>@u.Nombres</td>
-                <td>@u.PrimerApellido</td>
-                <td>@u.SegundoApellido</td>
-                <td>@u.Identificacion</td>
-                <td>@u.CorreoElectronico</td>
-                <td>@u.FechaDeRegistro</td>
-                <td>@u.FechaDeModificacion</td>
-                <td>
-                    @(u.Estado ? "Activo" : "Inactivo")
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@u.IdUsuario" class="btn btn-warning btn-sm">Editar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="dn-table-wrapper">
+    <div style="overflow-x:auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre completo</th>
+                    <th>Identificación</th>
+                    <th>Correo</th>
+                    <th>Registro</th>
+                    <th>Modificación</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr>
+                        <td>
+                            <div style="display:flex;align-items:center;gap:0.75rem;">
+                                <div style="width:34px;height:34px;border-radius:8px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700;font-size:0.8125rem;flex-shrink:0;">
+                                    @u.Nombres?.Substring(0, 1).ToUpper()
+                                </div>
+                                <div>
+                                    <div style="font-weight:600;color:var(--text-primary);">@u.Nombres @u.PrimerApellido @u.SegundoApellido</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="font-size:0.875rem;color:var(--text-secondary);">@u.Identificacion</td>
+                        <td style="font-size:0.875rem;">@u.CorreoElectronico</td>
+                        <td style="font-size:0.8125rem;color:var(--text-secondary);white-space:nowrap;">@u.FechaDeRegistro</td>
+                        <td style="font-size:0.8125rem;color:var(--text-secondary);white-space:nowrap;">@u.FechaDeModificacion</td>
+                        <td>
+                            @if (u.Estado)
+                            {
+                                <span class="dn-badge dn-badge-green">
+                                    <svg width="7" height="7" viewBox="0 0 8 8" style="margin-right:4px;"><circle cx="4" cy="4" r="4" fill="currentColor" /></svg>
+                                    Activo
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="dn-badge dn-badge-gray">Inactivo</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@u.IdUsuario" class="dn-btn dn-btn-warning dn-btn-sm">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                                Editar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

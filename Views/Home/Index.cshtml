@@ -3,169 +3,387 @@
 }
 
 <style>
-
-    .hero {
+    .hero-section {
         position: relative;
-        width: 100vw;
-        height: 520px;
-        margin-left: calc(-50vw + 50%);
-        background-image: url('/images/home-bg2.jpg');
-        background-size: cover;
-        background-position: center;
+        width: calc(100% + 4rem);
+        margin: -2rem -2rem 0 -2rem;
+        height: 480px;
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0C4A6E 100%);
         display: flex;
         align-items: center;
+        overflow: hidden;
     }
 
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient( 90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.05) 80% );
-        }
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, transparent 70%);
+        border-radius: 50%;
+    }
 
-    .hero-text {
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: 20%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .hero-content {
         position: relative;
+        z-index: 2;
+        padding: 0 4rem;
+        max-width: 620px;
+    }
+
+    .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(56,189,248,0.15);
+        border: 1px solid rgba(56,189,248,0.3);
+        color: #38BDF8;
+        padding: 0.375rem 0.875rem;
+        border-radius: 100px;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        animation: fadeInDown 0.6s ease both;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
         color: white;
-        max-width: 600px;
-        margin-left: 140px;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+        animation: fadeInDown 0.6s ease 0.1s both;
     }
 
-        .hero-text h1 {
-            font-size: 52px;
-            font-weight: 800;
-            line-height: 1.1;
-        }
+    .hero-title span { color: #38BDF8; }
 
-        .hero-text p {
-            font-size: 20px;
-            margin-top: 15px;
-        }
-
-    .cards-section {
-        margin-top: -130px;
-        position: relative;
-        z-index: 10;
+    .hero-subtitle {
+        font-size: 1.0625rem;
+        color: rgba(255,255,255,0.65);
+        margin-bottom: 2rem;
+        animation: fadeInDown 0.6s ease 0.2s both;
     }
 
-    .card-box {
-        background: white;
-        padding: 35px;
+    .hero-actions {
+        display: flex;
+        gap: 0.875rem;
+        animation: fadeInDown 0.6s ease 0.3s both;
+    }
+
+    .hero-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: #38BDF8;
+        color: #0F172A;
+        font-weight: 600;
+        font-size: 0.9375rem;
+        border-radius: 9px;
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+
+    .hero-btn-primary:hover {
+        background: #7DD3FC;
+        color: #0F172A;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(56,189,248,0.4);
+    }
+
+    .hero-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: rgba(255,255,255,0.08);
+        color: white;
+        font-weight: 500;
+        font-size: 0.9375rem;
+        border-radius: 9px;
+        border: 1px solid rgba(255,255,255,0.15);
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+
+    .hero-btn-secondary:hover {
+        background: rgba(255,255,255,0.15);
+        color: white;
+    }
+
+    .hero-floating {
+        position: absolute;
+        right: 4rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.875rem;
+        animation: fadeIn 0.8s ease 0.4s both;
+        z-index: 2;
+    }
+
+    .hero-stat {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 1.125rem 1.25rem;
+        color: white;
+        min-width: 140px;
+    }
+
+    .hero-stat-value {
+        font-size: 1.625rem;
+        font-weight: 700;
+        color: #38BDF8;
+        margin-bottom: 0.25rem;
+    }
+
+    .hero-stat-label {
+        font-size: 0.78125rem;
+        color: rgba(255,255,255,0.55);
+    }
+
+    /* Quick Actions Grid */
+    .quick-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.25rem;
+        margin-top: 2rem;
+    }
+
+    .quick-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
         border-radius: 14px;
-        box-shadow: 0 25px 40px rgba(0,0,0,0.2);
-        text-align: center;
-        transition: 0.3s;
+        padding: 1.5rem;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 0.5s ease both;
     }
 
-        .card-box:hover {
-            transform: translateY(-6px);
-        }
+    .quick-card:nth-child(1) { animation-delay: 0.05s; }
+    .quick-card:nth-child(2) { animation-delay: 0.10s; }
+    .quick-card:nth-child(3) { animation-delay: 0.15s; }
+    .quick-card:nth-child(4) { animation-delay: 0.20s; }
 
-        .card-box img {
-            width: 180px;
-            margin-bottom: 20px;
-        }
-
-        .card-box h4 {
-            font-weight: 600;
-        }
-
-        .card-box p {
-            color: #555;
-            margin-top: 10px;
-        }
-
-    .btn-primary {
-        margin-top: 15px;
-        padding: 10px 22px;
-        border-radius: 8px;
+    .quick-card:hover {
+        border-color: var(--accent);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-3px);
+        color: inherit;
     }
 
+    .quick-card-icon {
+        width: 44px; height: 44px;
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+    }
+
+    .quick-card-icon svg { width: 22px; height: 22px; }
+
+    .icon-blue { background: var(--accent-light); color: var(--accent); }
+    .icon-green { background: rgba(34,197,94,0.1); color: var(--success); }
+    .icon-orange { background: rgba(245,158,11,0.1); color: var(--warning); }
+    .icon-purple { background: rgba(168,85,247,0.1); color: #a855f7; }
+
+    .quick-card-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+    }
+
+    .quick-card-desc {
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        flex: 1;
+    }
+
+    .quick-card-arrow {
+        display: flex; align-items: center; gap: 0.375rem;
+        font-size: 0.8125rem; font-weight: 500;
+        color: var(--accent);
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: all 0.2s ease;
+    }
+
+    .quick-card:hover .quick-card-arrow {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .quick-card-arrow svg { width: 14px; height: 14px; }
+
+    /* Animations */
+    @@keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @@keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    @@media (max-width: 992px) {
+        .hero-section {
+            width: calc(100% + 2.5rem);
+            margin: -1.25rem -1.25rem 0 -1.25rem;
+            height: auto;
+            padding: 3rem 0;
+        }
+        .hero-content { padding: 0 1.5rem; }
+        .hero-floating { display: none; }
+        .quick-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @@media (max-width: 640px) {
+        .quick-grid { grid-template-columns: 1fr; }
+        .hero-actions { flex-direction: column; }
+    }
 </style>
 
+<!-- Hero Section -->
+<section class="hero-section" role="banner" aria-label="Sección principal de bienvenida">
+    <div class="hero-content">
+        <div class="hero-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="12"/></svg>
+            Sistema activo
+        </div>
 
-<!-- HERO como sección accesible -->
-<section class="hero" role="banner" aria-label="Sección principal de bienvenida">
-
-    <div class="hero-text">
-
-        <h1>
-            DE AHORA EN ADELANTE,<br>
-            MANEJA <br>
-            TU DINERO
+        <h1 class="hero-title">
+            Gestiona tu<br>
+            <span>SINPE Empresarial</span><br>
+            en un solo lugar
         </h1>
 
-        <p>
-            Paga, cobra y maneja tus finanzas desde un solo lugar.
+        <p class="hero-subtitle">
+            Registra pagos, administra cajas y genera reportes de forma rápida y segura.
         </p>
 
+        <div class="hero-actions">
+            <a asp-controller="Sinpes" asp-action="Create" class="hero-btn-primary"
+               aria-label="Ir a registrar un pago SINPE">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Registrar SINPE
+            </a>
+            <a asp-controller="Cajas" asp-action="Index" class="hero-btn-secondary"
+               aria-label="Ver cajas activas">
+                Ver cajas
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
     </div>
 
+    <!-- Floating Stats -->
+    <div class="hero-floating" aria-hidden="true">
+        <div class="hero-stat">
+            <div class="hero-stat-value">₡</div>
+            <div class="hero-stat-label">Pagos SINPE</div>
+        </div>
+        <div class="hero-stat">
+            <div class="hero-stat-value">24/7</div>
+            <div class="hero-stat-label">Disponible</div>
+        </div>
+        <div class="hero-stat">
+            <div class="hero-stat-value">100%</div>
+            <div class="hero-stat-label">Seguro</div>
+        </div>
+        <div class="hero-stat">
+            <div class="hero-stat-value">∞</div>
+            <div class="hero-stat-label">Transacciones</div>
+        </div>
+    </div>
 </section>
 
+<!-- Quick Actions -->
+<section class="quick-grid" aria-labelledby="accionesTitulo">
+    <h2 id="accionesTitulo" class="visually-hidden">Acciones rápidas</h2>
 
-<!-- Sección de opciones -->
-<section class="container cards-section" aria-labelledby="opcionesTitulo">
-
-    <h2 id="opcionesTitulo" class="visually-hidden">
-        Opciones principales del sistema
-    </h2>
-
-    <div class="row justify-content-center g-4">
-
-        <div class="col-md-5">
-
-            <div class="card-box" role="region" aria-labelledby="sinpeTitulo">
-
-                <h4 id="sinpeTitulo">Registrar pagos SINPE</h4>
-
-                <img src="/images/imagen1.png"
-                     alt="Ilustración para registrar pagos SINPE en el sistema" />
-
-                <p>
-                    Registra pagos SINPE de forma rápida
-                    y segura dentro del sistema.
-                </p>
-
-                <a asp-controller="Sinpes"
-                   asp-action="Create"
-                   class="btn btn-primary"
-                   aria-label="Ir a la página para registrar un pago SINPE">
-                    Registrar pago
-                </a>
-
-            </div>
-
+    <a asp-controller="Sinpes" asp-action="Create" class="quick-card"
+       aria-label="Registrar un pago SINPE">
+        <div class="quick-card-icon icon-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         </div>
-
-
-        <div class="col-md-5">
-
-            <div class="card-box" role="region" aria-labelledby="cajasTitulo">
-
-                <h4 id="cajasTitulo">Gestión de Cajas</h4>
-
-                <img src="/images/imagen2.png"
-                     alt="Ilustración de gestión y consulta de cajas del sistema" />
-
-                <p>
-                    Consulta las cajas activas
-                    y revisa los SINPE recibidos.
-                </p>
-
-                <a asp-controller="Cajas"
-                   asp-action="Index"
-                   class="btn btn-primary"
-                   aria-label="Ir a la página para ver las cajas activas">
-                    Ver cajas
-                </a>
-
-            </div>
-
+        <div>
+            <div class="quick-card-title">Registrar pago SINPE</div>
+            <div class="quick-card-desc">Registra pagos SINPE de forma rápida y segura dentro del sistema.</div>
         </div>
+        <div class="quick-card-arrow">
+            Ir ahora
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+    </a>
 
-    </div>
+    <a asp-controller="Cajas" asp-action="Index" class="quick-card"
+       aria-label="Gestión de cajas">
+        <div class="quick-card-icon icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18a1 1 0 011 1v16a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M3 9h18"/></svg>
+        </div>
+        <div>
+            <div class="quick-card-title">Gestión de cajas</div>
+            <div class="quick-card-desc">Consulta las cajas activas y revisa los SINPE recibidos.</div>
+        </div>
+        <div class="quick-card-arrow">
+            Ver cajas
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+    </a>
 
+    <a asp-controller="Comercios" asp-action="Index" class="quick-card"
+       aria-label="Administrar comercios">
+        <div class="quick-card-icon icon-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+            <div class="quick-card-title">Comercios</div>
+            <div class="quick-card-desc">Administra los comercios registrados en el sistema.</div>
+        </div>
+        <div class="quick-card-arrow">
+            Ver comercios
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+    </a>
+
+    <a asp-controller="Reportes" asp-action="Index" class="quick-card"
+       aria-label="Ver reportes mensuales">
+        <div class="quick-card-icon icon-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div>
+            <div class="quick-card-title">Reportes mensuales</div>
+            <div class="quick-card-desc">Genera y consulta reportes mensuales de transacciones y comisiones.</div>
+        </div>
+        <div class="quick-card-arrow">
+            Ver reportes
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+    </a>
 </section>
