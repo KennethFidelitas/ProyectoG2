@@ -26,23 +26,28 @@ namespace MiProyectoMVC.Repositories
         public Usuario ObtenerPorId(int id)
         {
             var lista = _http.GetFromJsonAsync<List<Usuario>>("usuarios").Result;
-            return lista?.FirstOrDefault(u => u.IdUsuario == id);
+            return lista?.FirstOrDefault(u => u.IdUsuario == id) ?? new Usuario();
         }
 
         public Usuario ObtenerPorIdentificacion(string identificacion)
         {
             var lista = _http.GetFromJsonAsync<List<Usuario>>("usuarios").Result;
-            return lista?.FirstOrDefault(u => u.Identificacion == identificacion);
+            return lista?.FirstOrDefault(u => u.Identificacion == identificacion) ?? new Usuario();
+        }
+
+        public Usuario ObtenerPorCorreo(string correo)
+        {
+            var lista = _http.GetFromJsonAsync<List<Usuario>>("usuarios").Result;
+            return lista?.FirstOrDefault(u =>
+                u.CorreoElectronico != null &&
+                u.CorreoElectronico.Equals(correo, StringComparison.OrdinalIgnoreCase)) ?? new Usuario();
         }
 
         public void Crear(Usuario usuario)
         {
             var json = new
             {
-                comercio = new
-                {
-                    idComercio = usuario.IdComercio
-                },
+                comercio = new { idComercio = usuario.IdComercio },
                 nombres = usuario.Nombres,
                 primerApellido = usuario.PrimerApellido,
                 segundoApellido = usuario.SegundoApellido,
@@ -51,8 +56,7 @@ namespace MiProyectoMVC.Repositories
                 estado = usuario.Estado
             };
 
-            var response = _http.PostAsJsonAsync("usuarios", json)
-                                .GetAwaiter().GetResult();
+            var response = _http.PostAsJsonAsync("usuarios", json).GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)
             {
@@ -66,10 +70,7 @@ namespace MiProyectoMVC.Repositories
             var json = new
             {
                 idUsuario = usuario.IdUsuario,
-                comercio = new
-                {
-                    idComercio = usuario.IdComercio
-                },
+                comercio = new { idComercio = usuario.IdComercio },
                 nombres = usuario.Nombres,
                 primerApellido = usuario.PrimerApellido,
                 segundoApellido = usuario.SegundoApellido,
@@ -78,8 +79,7 @@ namespace MiProyectoMVC.Repositories
                 estado = usuario.Estado
             };
 
-            var response = _http.PutAsJsonAsync($"usuarios/{usuario.IdUsuario}", json)
-                                .GetAwaiter().GetResult();
+            var response = _http.PutAsJsonAsync($"usuarios/{usuario.IdUsuario}", json).GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)
             {
@@ -90,14 +90,34 @@ namespace MiProyectoMVC.Repositories
 
         public void Eliminar(int id)
         {
-            var response = _http.DeleteAsync($"usuarios/{id}")
-                                .GetAwaiter().GetResult();
+            var response = _http.DeleteAsync($"usuarios/{id}").GetAwaiter().GetResult();
 
             if (!response.IsSuccessStatusCode)
             {
                 var error = response.Content.ReadAsStringAsync().Result;
                 throw new Exception("Error API: " + error);
             }
+        }
+
+        public void ActualizarIdNetUser(int idUsuario, string idNetUser)
+        {
+            var usuario = ObtenerPorId(idUsuario);
+            if (usuario == null) return;
+
+            var json = new
+            {
+                idUsuario = usuario.IdUsuario,
+                comercio = new { idComercio = usuario.IdComercio },
+                idNetUser = idNetUser,
+                nombres = usuario.Nombres,
+                primerApellido = usuario.PrimerApellido,
+                segundoApellido = usuario.SegundoApellido,
+                identificacion = usuario.Identificacion,
+                correoElectronico = usuario.CorreoElectronico,
+                estado = usuario.Estado
+            };
+
+            _ = _http.PutAsJsonAsync($"usuarios/{idUsuario}", json);
         }
     }
 }
