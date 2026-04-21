@@ -13,7 +13,7 @@ builder.Services.AddControllersWithViews()
 
 // Cookie Auth
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
     {
         options.LoginPath = "/Account/Login";
         options.AccessDeniedPath = "/Account/Login";
@@ -43,10 +43,6 @@ builder.Services.AddScoped<SinpeBusiness>();
 builder.Services.AddScoped<CajaBusiness>();
 builder.Services.AddScoped<ComercioBusiness>();
 builder.Services.AddScoped<UsuarioBusiness>();
-<<<<<<< Updated upstream
-var app = builder.Build();
-=======
->>>>>>> Stashed changes
 
 // Auth Service
 builder.Services.AddSingleton<AuthFileService>();

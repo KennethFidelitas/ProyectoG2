@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MiProyectoMVC.Business;
 using MiProyectoMVC.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MiProyectoMVC.Controllers
 {
-    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Administrador")]
     public class ConfiguracionComercioController : Controller
     {
         private readonly ConfiguracionComercioBusiness _business;
