@@ -1,17 +1,17 @@
-namespace MiProyectoMVC.Repositories;
-
-using MiProyectoMVC.Models;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using MiProyectoMVC.Models;
 
-public interface IUsuarioRepository
+namespace MiProyectoMVC.Repositories
 {
-    List<Usuario> ObtenerTodos();
-    Usuario ObtenerPorId(int id);
-    Usuario ObtenerPorIdentificacion(string identificacion);
-    void Crear(Usuario usuario);
-    void Editar(Usuario usuario);
-    void Eliminar(int id);
+    public interface IUsuarioRepository
+    {
+        List<Usuario> ObtenerTodos();
+        Usuario ObtenerPorId(int id);
+        Usuario ObtenerPorIdentificacion(string identificacion);
+        Usuario ObtenerPorCorreo(string correo);
+        void Crear(Usuario usuario);
+        void Editar(Usuario usuario);
+        void Eliminar(int id);
+        void ActualizarIdNetUser(int idUsuario, string idNetUser);
+    }
 }

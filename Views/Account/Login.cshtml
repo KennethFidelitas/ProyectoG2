@@ -1,0 +1,53 @@
+@model MiProyectoMVC.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - SinpeEmpresarial</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4>SinpeEmpresarial</h4>
+                    <small>Iniciar Sesión</small>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["Success"]</div>
+                    }
+                    <form asp-action="Login" method="post">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="All" class="text-danger mb-2"></div>
+                        <div class="mb-3">
+                            <label asp-for="Correo" class="form-label">Correo electrónico</label>
+                            <input asp-for="Correo" class="form-control" placeholder="correo@ejemplo.com" />
+                            <span asp-validation-for="Correo" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Contrasena" class="form-label">Contraseña</label>
+                            <input asp-for="Contrasena" class="form-control" type="password" />
+                            <span asp-validation-for="Contrasena" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Ingresar</button>
+                    </form>
+                    <hr />
+                    <p class="text-center mb-0">
+                        ¿No tiene cuenta? <a asp-action="Register">Registrarse</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

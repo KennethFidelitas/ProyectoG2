@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MiProyectoMVC.Business;
@@ -6,8 +7,10 @@ using MiProyectoMVC.Repositories;
 using System;
 using System.Threading.Tasks;
 
+
 namespace MiProyectoMVC.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Cookies", Roles = "Administrador,Cajero")]
     public class CajasController : Controller
     {
         private readonly CajaBusiness _business;

@@ -1,9 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MiProyectoMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MiProyectoMVC.Controllers;
 
+[Authorize(AuthenticationSchemes = "Cookies")]
 public class HomeController : Controller
 {
     public IActionResult Index()
