@@ -1,0 +1,14 @@
+[
+  {
+    "Correo": "admin@test.com",
+    "PasswordHash": "JAvlGPq9JyTdtvBO6x2llnRI1\u002BgxwIyPqCKAn3THIKk=",
+    "Rol": "Administrador",
+    "IdComercio": 0
+  },
+  {
+    "Correo": "cajas@test.com",
+    "PasswordHash": "aCsXhyEJU6Sh\u002BRqe7XV7w7Pogn/UZKLZcNsGOiSxUmo=",
+    "Rol": "Cajero",
+    "IdComercio": 0
+  }
+]
