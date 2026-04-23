@@ -10,10 +10,10 @@ namespace MiProyectoMVC.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly AuthFileService _authService;
+        private readonly AuthApiService _authService;
         private readonly IUsuarioRepository _usuarioRepository;
 
-        public AccountController(AuthFileService authService, IUsuarioRepository usuarioRepository)
+        public AccountController(AuthApiService authService, IUsuarioRepository usuarioRepository)
         {
             _authService = authService;
             _usuarioRepository = usuarioRepository;
@@ -84,15 +84,22 @@ namespace MiProyectoMVC.Controllers
             var nuevoUsuario = new UsuarioAuth
             {
                 Correo = model.Correo,
-                PasswordHash = AuthFileService.HashPassword(model.Contrasena),
+                PasswordHash = AuthApiService.HashPassword(model.Contrasena),
                 Rol = model.Rol,
                 IdComercio = idComercio
             };
 
-            _authService.Guardar(nuevoUsuario);
-
-            TempData["Success"] = "Usuario registrado correctamente. Inicie sesión.";
-            return RedirectToAction("Login");
+            try
+            {
+                _authService.Guardar(nuevoUsuario);
+                TempData["Success"] = "Usuario registrado correctamente. Inicie sesión.";
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }
         }
 
         [HttpPost]

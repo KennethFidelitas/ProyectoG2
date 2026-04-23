@@ -40,7 +40,7 @@ builder.Services.AddScoped<CajaBusiness>();
 builder.Services.AddScoped<ComercioBusiness>();
 builder.Services.AddScoped<UsuarioBusiness>();
 
-builder.Services.AddSingleton<AuthFileService>();
+builder.Services.AddScoped<AuthApiService>();
 
 var app = builder.Build();
 
