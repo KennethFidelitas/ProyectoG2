@@ -4,6 +4,57 @@
     ViewData["Title"] = "Bitácora";
 }
 
+<style>
+    .json-details summary {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+    }
+    .json-details summary::-webkit-details-marker { display: none; }
+    .json-details summary::before {
+        content: '';
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+    }
+    .json-details[open] summary::before { transform: rotate(90deg); }
+    .json-preview {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+    }
+    .json-pre {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-family: monospace;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 180px;
+        overflow-y: auto;
+        color: var(--text-primary);
+        line-height: 1.5;
+    }
+</style>
+
 <div class="page-header">
     <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.375rem;">
         <div style="width:36px;height:36px;background:var(--accent-light);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--accent);">
@@ -86,11 +137,35 @@
                                     <span style="color:var(--text-secondary);">—</span>
                                 }
                             </td>
-                            <td style="max-width:160px;font-size:0.8125rem;color:var(--text-secondary);">
-                                @(item.DatosAnteriores ?? "—")
+                            <td style="max-width:200px;">
+                                @if (!string.IsNullOrEmpty(item.DatosAnteriores))
+                                {
+                                    <details class="json-details">
+                                        <summary title="@item.DatosAnteriores">
+                                            <span class="json-preview">@(item.DatosAnteriores.Length > 40 ? item.DatosAnteriores.Substring(0, 40) + "…" : item.DatosAnteriores)</span>
+                                        </summary>
+                                        <pre class="json-pre">@item.DatosAnteriores</pre>
+                                    </details>
+                                }
+                                else
+                                {
+                                    <span style="color:var(--text-secondary);">—</span>
+                                }
                             </td>
-                            <td style="max-width:160px;font-size:0.8125rem;color:var(--text-secondary);">
-                                @(item.DatosPosteriores ?? "—")
+                            <td style="max-width:200px;">
+                                @if (!string.IsNullOrEmpty(item.DatosPosteriores))
+                                {
+                                    <details class="json-details">
+                                        <summary title="@item.DatosPosteriores">
+                                            <span class="json-preview">@(item.DatosPosteriores.Length > 40 ? item.DatosPosteriores.Substring(0, 40) + "…" : item.DatosPosteriores)</span>
+                                        </summary>
+                                        <pre class="json-pre">@item.DatosPosteriores</pre>
+                                    </details>
+                                }
+                                else
+                                {
+                                    <span style="color:var(--text-secondary);">—</span>
+                                }
                             </td>
                         </tr>
                     }
