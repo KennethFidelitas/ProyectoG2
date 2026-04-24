@@ -20,6 +20,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 builder.Services.AddAuthorization();
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHttpClient("API", client =>
 {
@@ -55,6 +57,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

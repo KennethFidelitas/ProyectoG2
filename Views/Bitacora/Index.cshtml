@@ -4,74 +4,173 @@
     ViewData["Title"] = "Bitácora";
 }
 
-<h2 id="tituloBitacora">Bitácora de Eventos</h2>
-<hr />
+<style>
+    .json-details summary {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+    }
+    .json-details summary::-webkit-details-marker { display: none; }
+    .json-details summary::before {
+        content: '';
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+    }
+    .json-details[open] summary::before { transform: rotate(90deg); }
+    .json-preview {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+    }
+    .json-pre {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-family: monospace;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 180px;
+        overflow-y: auto;
+        color: var(--text-primary);
+        line-height: 1.5;
+    }
+</style>
+
+<div class="page-header">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.375rem;">
+        <div style="width:36px;height:36px;background:var(--accent-light);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--accent);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h1 class="page-title" id="tituloBitacora" style="margin:0;">Bitácora de Eventos</h1>
+    </div>
+    <p class="page-subtitle">Registro de todas las actividades y eventos del sistema.</p>
+</div>
 
 @if (TempData["Mensaje"] != null)
 {
-    <div class="alert alert-success">
+    <div class="dn-alert dn-alert-success" role="alert">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         @TempData["Mensaje"]
     </div>
 }
 
-<table class="table table-striped table-bordered table-hover">
-
-    <thead class="table-dark">
-        <tr>
-            <th>#</th>
-            <th>Tabla</th>
-            <th>Tipo</th>
-            <th>Fecha</th>
-            <th>Descripción</th>
-            <th>Error</th>
-            <th>Antes</th>
-            <th>Después</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-        @if (!Model.Any())
-        {
-            <tr>
-                <td colspan="8" class="text-center">
-                    No hay eventos registrados
-                </td>
-            </tr>
-        }
-        else
-        {
-            @foreach (var item in Model)
-            {
+<div class="dn-table-wrapper">
+    <div style="overflow-x:auto;">
+        <table aria-labelledby="tituloBitacora">
+            <thead>
                 <tr>
-                    <td>@item.IdEvento</td>
-                    <td>@item.TablaDeEvento</td>
-                    <td>@item.TipoDeEvento</td>
-                    <td>@item.FechaDeEvento.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@item.DescripcionDeEvento</td>
-
-                    <td>
-                        @if (!string.IsNullOrEmpty(item.StackTrace))
-                        {
-                            <details>
-                                <summary>Ver error</summary>
-                                <pre style="max-height:200px; overflow:auto;">
-@item.StackTrace
-                                </pre>
-                            </details>
-                        }
-                        else
-                        {
-                            <span>-</span>
-                        }
-                    </td>
-
-                    <td>@item.DatosAnteriores ?? "-"</td>
-                    <td>@item.DatosPosteriores ?? "-"</td>
+                    <th>#</th>
+                    <th>Tabla</th>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Error</th>
+                    <th>Antes</th>
+                    <th>Después</th>
                 </tr>
-            }
-        }
-
-    </tbody>
-
-</table>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="8" style="text-align:center;padding:3rem;color:var(--text-secondary);">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:block;margin:0 auto 0.75rem;opacity:0.4;"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            No hay eventos registrados
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="font-weight:600;color:var(--text-secondary);font-size:0.8125rem;">@item.IdEvento</td>
+                            <td>
+                                <span class="dn-badge dn-badge-blue">@item.TablaDeEvento</span>
+                            </td>
+                            <td>
+                                @{
+                                    var tipo = item.TipoDeEvento?.ToUpper();
+                                    var badgeClass = tipo switch {
+                                        "INSERT" => "dn-badge dn-badge-green",
+                                        "UPDATE" => "dn-badge dn-badge-yellow",
+                                        "DELETE" => "dn-badge dn-badge-red",
+                                        "ERROR"  => "dn-badge dn-badge-red",
+                                        _        => "dn-badge dn-badge-gray"
+                                    };
+                                }
+                                <span class="@badgeClass">@item.TipoDeEvento</span>
+                            </td>
+                            <td style="white-space:nowrap;color:var(--text-secondary);font-size:0.8125rem;">
+                                @item.FechaDeEvento.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+                            <td style="max-width:260px;">@item.DescripcionDeEvento</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.StackTrace))
+                                {
+                                    <details>
+                                        <summary style="cursor:pointer;color:var(--danger);font-size:0.8125rem;font-weight:500;">Ver error</summary>
+                                        <pre style="max-height:180px;overflow:auto;margin-top:0.5rem;padding:0.75rem;background:var(--bg-surface);border-radius:6px;font-size:0.75rem;border:1px solid var(--border-color);">@item.StackTrace</pre>
+                                    </details>
+                                }
+                                else
+                                {
+                                    <span style="color:var(--text-secondary);">—</span>
+                                }
+                            </td>
+                            <td style="max-width:200px;">
+                                @if (!string.IsNullOrEmpty(item.DatosAnteriores))
+                                {
+                                    <details class="json-details">
+                                        <summary title="@item.DatosAnteriores">
+                                            <span class="json-preview">@(item.DatosAnteriores.Length > 40 ? item.DatosAnteriores.Substring(0, 40) + "…" : item.DatosAnteriores)</span>
+                                        </summary>
+                                        <pre class="json-pre">@item.DatosAnteriores</pre>
+                                    </details>
+                                }
+                                else
+                                {
+                                    <span style="color:var(--text-secondary);">—</span>
+                                }
+                            </td>
+                            <td style="max-width:200px;">
+                                @if (!string.IsNullOrEmpty(item.DatosPosteriores))
+                                {
+                                    <details class="json-details">
+                                        <summary title="@item.DatosPosteriores">
+                                            <span class="json-preview">@(item.DatosPosteriores.Length > 40 ? item.DatosPosteriores.Substring(0, 40) + "…" : item.DatosPosteriores)</span>
+                                        </summary>
+                                        <pre class="json-pre">@item.DatosPosteriores</pre>
+                                    </details>
+                                }
+                                else
+                                {
+                                    <span style="color:var(--text-secondary);">—</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,53 +1,74 @@
-﻿@model MiProyectoMVC.Models.Usuario
-
-<h2>Editar Usuario</h2>
-
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">@ViewBag.Error</div>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Editar Usuario";
 }
+@model Usuario
 
-<form asp-action="Edit" method="post">
-
-    <input type="hidden" asp-for="IdUsuario" />
-    <input type="hidden" asp-for="IdComercio" />
-
-    <div class="form-group">
-        <label>Nombres</label>
-        <input asp-for="Nombres" class="form-control" required />
+<div style="max-width:540px;">
+    <div class="page-header">
+        <a asp-action="Index" class="dn-btn dn-btn-secondary dn-btn-sm" style="margin-bottom:1rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            Volver a usuarios
+        </a>
+        <h1 class="page-title">Editar Usuario</h1>
+        <p class="page-subtitle">Modifica los datos del usuario.</p>
     </div>
 
-    <div class="form-group">
-        <label>Primer Apellido</label>
-        <input asp-for="PrimerApellido" class="form-control" required />
+    @if (ViewBag.Error != null)
+    {
+        <div class="dn-alert dn-alert-danger" role="alert">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
+            @ViewBag.Error
+        </div>
+    }
+
+    <div class="dn-card">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="IdUsuario" />
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <div class="dn-form-group">
+                    <label class="dn-label" asp-for="Nombres">Nombres</label>
+                    <input asp-for="Nombres" class="dn-input" required />
+                </div>
+                <div class="dn-form-group">
+                    <label class="dn-label" asp-for="PrimerApellido">Primer apellido</label>
+                    <input asp-for="PrimerApellido" class="dn-input" required />
+                </div>
+            </div>
+
+            <div class="dn-form-group">
+                <label class="dn-label" asp-for="SegundoApellido">Segundo apellido</label>
+                <input asp-for="SegundoApellido" class="dn-input" required />
+            </div>
+
+            <div class="dn-form-group">
+                <label class="dn-label" asp-for="Identificacion">Identificación</label>
+                <input asp-for="Identificacion" class="dn-input" required />
+            </div>
+
+            <div class="dn-form-group">
+                <label class="dn-label" asp-for="CorreoElectronico">Correo electrónico</label>
+                <input asp-for="CorreoElectronico" type="email" class="dn-input" required />
+            </div>
+
+            <div class="dn-form-group">
+                <label class="dn-label" asp-for="Estado">Estado</label>
+                <select asp-for="Estado" class="dn-select">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+
+            <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
+                <button type="submit" class="dn-btn dn-btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /></svg>
+                    Actualizar
+                </button>
+                <a asp-action="Index" class="dn-btn dn-btn-secondary">Volver</a>
+            </div>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label>Segundo Apellido</label>
-        <input asp-for="SegundoApellido" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label>Identificación</label>
-        <input asp-for="Identificacion" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label>Correo Electrónico</label>
-        <input asp-for="CorreoElectronico" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label>Estado</label>
-        <select asp-for="Estado" class="form-control">
-            <option value="true">Activo</option>
-            <option value="false">Inactivo</option>
-        </select>
-    </div>
-
-    <br />
-
-    <button type="submit" class="btn btn-success">Actualizar</button>
-    <a asp-action="Index" class="btn btn-secondary">Volver</a>
-
-</form>
+</div>
